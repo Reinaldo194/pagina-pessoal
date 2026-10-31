@@ -1,0 +1,1180 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[brazilian]{babel}
+\usepackage{lmodern}
+\usepackage[margin=2.6cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usepackage{booktabs}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=green!40!black,urlcolor=blue!50!black]{hyperref}
+
+\setlength{\parskip}{0.35em}
+\linespread{1.08}
+\emergencystretch=2.5em
+
+% ---------- ambientes ----------
+\theoremstyle{plain}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposicao}[teorema]{Proposição}
+\newtheorem{lema}[teorema]{Lema}
+\newtheorem{corolario}[teorema]{Corolário}
+\newtheorem{conjectura}[teorema]{Conjectura}
+\theoremstyle{definition}
+\newtheorem{definicao}[teorema]{Definição}
+\newtheorem{exemplo}[teorema]{Exemplo}
+\newtheorem{hipotese}{Hipótese}
+\newtheorem{problema}{Problema aberto}
+\theoremstyle{remark}
+\newtheorem{observacao}[teorema]{Observação}
+
+% ---------- notação ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Hz}{H_0^1(\Omega)}
+\newcommand{\Hm}{H^{-1}(\Omega)}
+\newcommand{\norm}[1]{\lVert #1\rVert}
+\newcommand{\abs}[1]{\lvert #1\rvert}
+\newcommand{\Mh}{\widehat{M}}
+\newcommand{\dx}{\,\mathrm{d}x}
+\DeclareMathOperator{\spec}{\sigma}
+
+\title{\textbf{Problemas elípticos do tipo Kirchhoff:\\
+ressonância, condições de Landesman--Lazer\\ e bifurcação}\\[0.4em]
+\large Um survey orientado ao problema $-M(\norm{u}^2)\Delta u=\lambda u+\mu f(x,u)$}
+\author{Documento de trabalho}
+\date{31 de outubro de 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Este texto reúne o que se sabe sobre problemas elípticos estacionários do tipo
+Kirchhoff em domínios limitados, com atenção especial à interação entre o termo
+não local $M(\norm{u}^2)$ e fenômenos de ressonância. Depois de um panorama
+histórico e bibliográfico (origem física, primeiros resultados elípticos,
+métodos variacionais e topológicos, crescimento crítico, problemas em $\R^N$,
+versões fracionárias e bifurcação), descrevemos a teoria clássica de
+Landesman--Lazer e sua versão local, devida a Rezende, Sánchez-Aguilar e Silva.
+Em seguida analisamos o problema linear de Kirchhoff
+$-M(\norm{u}^2)\Delta u=\lambda u$ e mostramos que seu ``espectro'' é uma
+união de intervalos, e não um conjunto discreto. Essa observação, elementar mas
+decisiva, muda o que se deve entender por ressonância no caso não local: quando
+$M$ é estritamente monótona, as soluções próximas de $\pm t\varphi_1$ são não
+degeneradas e persistem sob perturbações pequenas sem nenhuma condição do tipo
+Landesman--Lazer. Identificamos quatro situações em que a ressonância é genuína
+(bifurcação a partir de zero, bifurcação a partir do infinito, pontos de dobra
+de $M$ e patamares de $M$) e discutimos, para cada uma, o papel que uma condição
+de Landesman--Lazer local pode desempenhar. O texto termina com uma análise
+crítica do roteiro de artigo que motivou este survey e com uma lista de
+problemas em aberto.
+\end{abstract}
+
+\medskip
+\noindent\textbf{Palavras-chave:} equação de Kirchhoff; problemas não locais;
+ressonância; condição de Landesman--Lazer; redução de Lyapunov--Schmidt;
+bifurcação.
+
+\noindent\textbf{MSC 2020:} 35J60, 35J20, 35B32, 35B34, 47J15.
+
+\tableofcontents
+\newpage
+
+%=====================================================================
+\section{Introdução}\label{sec:intro}
+%=====================================================================
+
+\subsection{O modelo de Kirchhoff}
+
+Em 1883, ao estudar as vibrações transversais de uma corda elástica esticada,
+Kirchhoff~\cite{Kirchhoff1883} propôs uma correção à equação da onda que leva em
+conta a variação do comprimento da corda durante o movimento. Na forma
+adimensional, para uma corda de comprimento $L$, o modelo é
+\begin{equation}\label{eq:kirchhoff-original}
+\rho\, \frac{\partial^2 u}{\partial t^2}
+-\Bigl(\frac{P_0}{h}+\frac{E}{2L}\int_0^L\Bigl|\frac{\partial u}{\partial x}\Bigr|^2\dx\Bigr)
+\frac{\partial^2 u}{\partial x^2}=0,
+\end{equation}
+em que $\rho$ é a densidade de massa, $P_0$ a tensão inicial, $h$ a área da
+seção transversal e $E$ o módulo de Young. O coeficiente que multiplica
+$u_{xx}$ depende da energia potencial da configuração inteira, e não do valor de
+$u$ num ponto: esse é o caráter \emph{não local} da equação. Carrier~\cite{Carrier1945}
+chegou a um modelo análogo de forma independente.
+
+A generalização natural em dimensão $N$ é
+\begin{equation}\label{eq:kirchhoff-evolucao}
+u_{tt}-M\Bigl(\int_\Omega\abs{\nabla u}^2\dx\Bigr)\Delta u=g(x,u)\quad\text{em }\Omega\times(0,T),
+\end{equation}
+com $M\colon[0,\infty)\to\R$ contínua. Os primeiros resultados rigorosos de
+existência para~\eqref{eq:kirchhoff-evolucao} remontam a
+Bernstein~\cite{Bernstein1940} e a Pohožaev~\cite{Pohozaev1975}. A equação
+ganhou visibilidade ampla depois que J.-L.~Lions~\cite{Lions1978} a formulou
+como um problema abstrato e propôs uma abordagem funcional. Seguiram-se
+trabalhos sobre boa colocação em espaços de Sobolev de ordem baixa, como o de
+Arosio e Panizzi~\cite{ArosioPanizzi1996}, e sobre o caso degenerado com dados
+analíticos, como o de D'Ancona e Spagnolo~\cite{DanconaSpagnolo1992}. O
+editorial de Pucci e Rădulescu~\cite{PucciRadulescu2019} dá uma ideia da
+amplitude que a área atingiu.
+
+\subsection{O problema estacionário}
+
+As soluções estacionárias de~\eqref{eq:kirchhoff-evolucao} com condição de
+Dirichlet satisfazem
+\begin{equation}\label{eq:P-geral}
+\begin{cases}
+-M\bigl(\norm{u}^2\bigr)\Delta u=g(x,u) & \text{em }\Omega,\\
+u=0 & \text{sobre }\partial\Omega,
+\end{cases}
+\qquad \norm{u}^2=\int_\Omega\abs{\nabla u}^2\dx .
+\end{equation}
+O caso modelo é $M(t)=a+bt$, com $a>0$ e $b\ge0$. O problema deixa de ser uma
+equação diferencial pontual no sentido usual, o que tem consequências técnicas
+concretas. A mais conhecida aparece em sequências de Palais--Smale: de
+$u_n\rightharpoonup u$ em $\Hz$ não se pode concluir que
+$M(\norm{u_n}^2)\to M(\norm{u}^2)$, e a passagem ao limite exige um argumento
+adicional. Outra consequência, menos explorada na literatura e central neste
+texto, diz respeito à estrutura espectral do problema linear associado.
+
+\subsection{Objetivo e organização}
+
+O ponto de partida é o problema
+\begin{equation}\label{eq:P}\tag{$P_{\lambda,\mu}$}
+\begin{cases}
+-M\bigl(\norm{u}^2\bigr)\Delta u=\lambda u+\mu f(x,u) & \text{em }\Omega,\\
+u=0 & \text{sobre }\partial\Omega,
+\end{cases}
+\end{equation}
+em que $\Omega\subset\R^N$ é um domínio limitado e suave, $\lambda>0$ e
+$\mu\in\R$ são parâmetros e $f$ é uma função de Carathéodory. O interesse está
+em entender existência, não existência e multiplicidade de soluções quando
+$\lambda$ está ``perto da ressonância'' e $f$ satisfaz uma condição de
+Landesman--Lazer apenas \emph{local}, no espírito de Rezende, Sánchez-Aguilar e
+Silva~\cite{RezendeSanchezSilva2019}.
+
+O texto está organizado assim. A Seção~\ref{sec:formulacao} fixa notação,
+hipóteses e a estrutura variacional. A Seção~\ref{sec:panorama} faz o
+levantamento bibliográfico dos problemas do tipo Kirchhoff em domínios
+limitados e em $\R^N$. A Seção~\ref{sec:LL} revisa a teoria de
+Landesman--Lazer, clássica e local, no caso semilinear. A
+Seção~\ref{sec:espectro} estuda o problema linear de Kirchhoff, e a
+Seção~\ref{sec:consequencias} tira as consequências para~\eqref{eq:P}: redução a
+um problema semilinear com vínculo, multiplicidade perturbativa, bifurcação a
+partir de zero e do infinito e uma classificação dos regimes ressonantes. A
+Seção~\ref{sec:LL-kirchhoff} propõe uma formulação de condição de
+Landesman--Lazer local adaptada ao caso não local. A
+Seção~\ref{sec:critica} comenta o roteiro de artigo que motivou este
+levantamento, e a Seção~\ref{sec:abertos} reúne problemas em aberto.
+
+Uma advertência sobre o estatuto dos resultados. As
+Proposições~\ref{prop:reducao}, \ref{prop:espectro}, o Lema~\ref{lema:naodeg},
+o Teorema~\ref{teo:multiplicidade} e as Proposições~\ref{prop:bif-zero},
+\ref{prop:bif-infinito} e~\ref{prop:patamar} vêm acompanhados de demonstração
+completa ou de redução explícita a teoremas clássicos. Os enunciados da
+Seção~\ref{sec:LL-kirchhoff} e a Conjectura~\ref{conj:dobra} são propostas de
+trabalho: as lacunas que faltam preencher estão indicadas no próprio texto.
+
+%=====================================================================
+\section{Formulação, hipóteses e estrutura variacional}\label{sec:formulacao}
+%=====================================================================
+
+\subsection{Notação}
+
+Denotamos por $H=\Hz$ o espaço de Sobolev com produto interno
+$\langle u,v\rangle=\int_\Omega\nabla u\cdot\nabla v\dx$ e norma $\norm{\cdot}$,
+por $\abs{\cdot}_q$ a norma de $L^q(\Omega)$ e por $2^*=2N/(N-2)$ o expoente
+crítico de Sobolev quando $N\ge3$ ($2^*=\infty$ se $N=1,2$). Escrevemos
+\[
+0<\lambda_1<\lambda_2\le\lambda_3\le\cdots\to\infty
+\]
+para os autovalores de $-\Delta$ com condição de Dirichlet, repetidos segundo a
+multiplicidade, e $\{\varphi_k\}$ para uma base de autofunções ortonormal em
+$L^2(\Omega)$, com $\varphi_1>0$. Com essa normalização,
+\begin{equation}\label{eq:normalizacao}
+\abs{\varphi_k}_2=1,\qquad \norm{\varphi_k}^2=\lambda_k,\qquad
+\langle\varphi_j,\varphi_k\rangle=\lambda_k\delta_{jk}.
+\end{equation}
+O autoespaço associado a um autovalor $\Lambda$ é $E(\Lambda)$, e
+$\spec(-\Delta)=\{\lambda_k\}_{k\ge1}$. Como as autofunções são ortogonais
+simultaneamente em $L^2$ e em $H$, a decomposição
+$u=t\varphi_1+v$, com $v\perp\varphi_1$, satisfaz
+\begin{equation}\label{eq:pitagoras}
+\norm{u}^2=\lambda_1t^2+\norm{v}^2,\qquad \abs{u}_2^2=t^2+\abs{v}_2^2.
+\end{equation}
+Essa identidade é usada o tempo todo adiante. Ela mostra que o argumento de
+$M$ na decomposição de Lyapunov--Schmidt é $\lambda_1t^2+\norm{v}^2$, e não
+$t^2+\norm{v}^2$; a segunda forma só vale se $\varphi_1$ for normalizada em
+$H$ (ver Seção~\ref{sec:critica}).
+
+\subsection{Hipóteses sobre a função de Kirchhoff}
+
+As hipóteses mais usadas na literatura são as seguintes.
+
+\begin{description}[leftmargin=2.6em,style=nextline]
+\item[$(M_1)$] $M\in C([0,\infty))$ e existe $m_0>0$ tal que $M(t)\ge m_0$
+para todo $t\ge0$ (\emph{caso não degenerado}).
+\item[$(M_1')$] $M\in C([0,\infty))$, $M(0)=0$ e $M(t)>0$ para $t>0$
+(\emph{caso degenerado}; por exemplo $M(t)=bt$).
+\item[$(M_2)$] Com $\Mh(t)=\int_0^tM(s)\,\mathrm{d}s$, existe $\theta\ge1$ tal
+que $\Mh(t)\ge\theta^{-1}M(t)t$ para todo $t\ge0$.
+\item[$(M_3)$] $M$ é não decrescente.
+\item[$(M_\infty)$] Existe $m_\infty=\lim_{t\to\infty}M(t)\in(0,\infty)$.
+\end{description}
+
+A hipótese $(M_2)$ é a contrapartida não local da condição de
+Ambrosetti--Rabinowitz: no caso $M(t)=a+bt$ vale com $\theta=2$, mas não com
+$\theta=1$. Ela serve, essencialmente, para limitar sequências de Palais--Smale
+quando a não linearidade é superlinear; para os resultados locais e
+perturbativos deste texto, ela não é necessária. A hipótese $(M_3)$ aparece com
+frequência em resultados de unicidade e de positividade, e
+$(M_\infty)$ é a hipótese natural para estudar ressonância no infinito
+(Subseção~\ref{subsec:bif-infinito}).
+
+\subsection{O funcional energia}
+
+Com $F(x,s)=\int_0^sf(x,\tau)\,\mathrm{d}\tau$, o funcional associado
+a~\eqref{eq:P} é
+\begin{equation}\label{eq:funcional}
+I_{\lambda,\mu}(u)=\frac12\Mh\bigl(\norm{u}^2\bigr)-\frac{\lambda}{2}\abs{u}_2^2-\mu\int_\Omega F(x,u)\dx .
+\end{equation}
+Se $f$ tem crescimento subcrítico, isto é,
+$\abs{f(x,s)}\le C(1+\abs{s}^{p-1})$ com $1\le p<2^*$, então
+$I_{\lambda,\mu}\in C^1(H,\R)$ e
+\[
+\langle I_{\lambda,\mu}'(u),\phi\rangle
+=M\bigl(\norm{u}^2\bigr)\int_\Omega\nabla u\cdot\nabla\phi\dx
+-\lambda\int_\Omega u\phi\dx-\mu\int_\Omega f(x,u)\phi\dx,
+\]
+de modo que os pontos críticos de $I_{\lambda,\mu}$ são exatamente as soluções
+fracas de~\eqref{eq:P}. Sem hipótese de crescimento global, como na teoria local
+de Landesman--Lazer, o funcional pode nem estar bem definido em $H$; a saída
+habitual é truncar $f$ fora de um nível $S$ e, depois, provar uma estimativa
+$L^\infty$ que torne o truncamento inativo
+(Subseção~\ref{subsec:LL-local}).
+
+Uma desigualdade elementar que se usa com frequência: sob $(M_1)$,
+\begin{equation}\label{eq:Mh-crescimento}
+\Mh(a+b)-\Mh(a)=\int_a^{a+b}M(s)\,\mathrm{d}s\ge m_0b,\qquad a,b\ge0.
+\end{equation}
+Por exemplo, se $u=t\varphi_1+v$ e $v\perp\varphi_1$, então
+$\norm{v}^2\ge\lambda_2\abs{v}_2^2$ e, por~\eqref{eq:pitagoras}
+e~\eqref{eq:Mh-crescimento},
+\begin{equation}\label{eq:coercividade-v}
+\frac12\Mh\bigl(\lambda_1t^2+\norm{v}^2\bigr)-\frac{\lambda}{2}\abs{v}_2^2
+\ \ge\ \frac12\Mh(\lambda_1t^2)+\frac12\Bigl(m_0-\frac{\lambda}{\lambda_2}\Bigr)\norm{v}^2 .
+\end{equation}
+Logo o funcional é coercivo na direção de $\langle\varphi_1\rangle^\perp$ se
+$\lambda<m_0\lambda_2$. Essa é a condição de \emph{lacuna espectral} que
+substitui, no caso não local, a exigência $\lambda<\lambda_2$ do caso
+semilinear.
+
+%=====================================================================
+\section{Panorama da literatura}\label{sec:panorama}
+%=====================================================================
+
+Esta seção organiza a literatura por método e por tipo de problema. Não se
+pretende exaustividade (a produção sobre Kirchhoff estacionário passa de
+milhares de artigos), e sim mapear as linhas que dialogam com ressonância e
+bifurcação.
+
+\subsection{Primeiros resultados elípticos}
+
+O estudo sistemático de~\eqref{eq:P-geral} em domínios limitados começou com
+Alves e Corrêa~\cite{AlvesCorrea2001}, que trataram um operador não linear não
+local por argumentos de ponto fixo e aproximação de Galerkin. Ma e Muñoz
+Rivera~\cite{MaRivera2003} obtiveram soluções positivas para um problema de
+transmissão não local por métodos variacionais. Alves, Corrêa e
+Ma~\cite{AlvesCorreaMa2005} provaram a existência de soluções positivas para
+$M$ não degenerada e $f$ superlinear, usando o teorema do passo da montanha com
+uma truncação de $M$; esse artigo popularizou a hipótese de que $M$ é limitada
+inferiormente e a técnica de truncar o termo não local para recuperar
+compacidade. Ma~\cite{Ma2005} fez um balanço das questões então em aberto.
+
+\subsection{Teoria de índices, Morse e soluções nodais}
+
+Perera e Zhang~\cite{PereraZhang2006} introduziram o problema de autovalores
+não linear
+\begin{equation}\label{eq:autovalor-PZ}
+-\norm{u}^2\Delta u=\nu\,u^3\quad\text{em }\Omega,\qquad u=0\ \text{sobre }\partial\Omega,
+\end{equation}
+homogêneo de grau três, e construíram, via índice de Yang, uma sequência de
+autovalores $\nu_k\to\infty$. Com isso obtiveram soluções não triviais para o
+caso $M(t)=a+bt$ e $f$ ``assintoticamente 4-linear'', calculando grupos
+críticos. Esse problema de autovalores é o análogo natural de
+$-\Delta u=\lambda u$ quando a não linearidade cresce como $u^3$ no infinito, e
+ele será retomado na Seção~\ref{sec:abertos}. Zhang e
+Perera~\cite{ZhangPerera2006} obtiveram soluções que mudam de sinal por meio de
+conjuntos invariantes do fluxo de descida; Mao e Zhang~\cite{MaoZhang2009}
+produziram soluções nodais e múltiplas sem a condição de Palais--Smale; He e
+Zou~\cite{HeZou2009} mostraram a existência de infinitas soluções. Ricceri~\cite{Ricceri2010}
+estudou a dependência em dois parâmetros, e Chen, Kuo e Wu~\cite{ChenKuoWu2011}
+aplicaram o método da variedade de Nehari a problemas côncavo-convexos com pesos
+que mudam de sinal.
+
+\subsection{Crescimento crítico}
+
+O caso $g(x,u)=\lambda h(x,u)+\abs{u}^{2^*-2}u$ exige estimar o nível minimax
+abaixo do limiar de compacidade, que no caso de Kirchhoff depende de $a$, $b$
+e $N$. Alves, Corrêa e Figueiredo~\cite{AlvesCorreaFigueiredo2010} trataram
+uma classe desses problemas; Figueiredo~\cite{Figueiredo2013} desenvolveu um
+argumento de truncamento do termo não local que se tornou padrão. Em dimensão
+quatro, onde $2^*=4$ e o termo $b\norm{u}^2\Delta u$ tem a mesma homogeneidade
+que a não linearidade crítica, Naimen~\cite{Naimen2014} fez a primeira análise
+sistemática do problema de Brezis--Nirenberg para Kirchhoff.
+
+\subsection{Problemas em \texorpdfstring{$\R^N$}{RN}}
+
+Em $\R^3$, com potencial $V$, He e Zou~\cite{HeZou2012} estudaram existência e
+concentração de soluções positivas, relacionando o número de soluções com a
+topologia do conjunto de mínimos de $V$. Li e Ye~\cite{LiYe2014} obtiveram
+estados fundamentais positivos para não linearidades $\abs{u}^{p-2}u$ com
+$3<p<6$, faixa em que a condição de Ambrosetti--Rabinowitz não é diretamente
+aplicável e que exige uma variedade de Pohožaev--Nehari. Não detalharemos essa
+linha, que se afasta do tema de ressonância.
+
+\subsection{Versões fracionárias}
+
+Fiscella e Valdinoci~\cite{FiscellaValdinoci2014} propuseram um modelo
+estacionário de Kirchhoff com o Laplaciano fracionário, motivado pela
+interpretação não local da tensão na corda, e trataram o caso crítico.
+Autuori, Fiscella e Pucci~\cite{AutuoriFiscellaPucci2015} estenderam esses
+resultados, incluindo o caso degenerado.
+
+\subsection{Bifurcação e mudança de variáveis}
+
+Uma linha mais recente, e a mais próxima do tema deste survey, trata o
+problema de Kirchhoff por teoria de bifurcação. Ambrosetti e
+Arcoya~\cite{AmbrosettiArcoya2017} provaram, entre outros resultados, que
+$\Lambda_1=M(0)\lambda_1$ é o único ponto de bifurcação de soluções positivas a
+partir da solução trivial e que dele emana um ramo ilimitado de soluções
+positivas; trataram também bifurcação a partir do infinito e casos
+superlineares. Santos Júnior e Siciliano~\cite{SantosJuniorSiciliano2018}
+estudaram o caso em que o termo não local se anula, e Cintra, Santos Júnior,
+Siciliano e Suárez~\cite{CintraEtAl2020} combinaram uma mudança de variáveis com
+métodos de bifurcação para obter contínuos de soluções positivas em problemas
+de tipo logístico. A ideia comum é a mesma que formalizamos na
+Proposição~\ref{prop:reducao}: fixado o valor $s=\norm{u}^2$, o problema de
+Kirchhoff é um problema semilinear com parâmetros reescalonados por $M(s)$.
+
+\subsection{Ressonância e condições de Landesman--Lazer no caso de Kirchhoff}
+
+A literatura sobre ressonância para Kirchhoff é bem menor. Bensedik e
+Bouchekif~\cite{BensedikBouchekif2009} trataram não linearidades
+assintoticamente lineares, com $M$ não decrescente e limitada inferiormente.
+Sun e Tang~\cite{SunTang2013} provaram existência de soluções fracas para
+problemas de Kirchhoff com condição de Dirichlet ressonantes em um autovalor
+arbitrário, sob uma condição do tipo Landesman--Lazer, usando teoremas de
+linking. Song, Tang e Chen~\cite{SongTangChen2015} obtiveram três soluções
+quando o parâmetro se aproxima pela esquerda do primeiro autovalor não linear,
+combinando o princípio variacional de Ekeland com o passo da montanha.
+
+Nesses trabalhos, a ressonância é medida em relação a um problema de
+autovalores homogêneo, como~\eqref{eq:autovalor-PZ}, ou em relação ao
+comportamento assintótico de $M$ e $f$ no infinito. Pelo que pudemos
+verificar, \emph{não há na literatura um tratamento de~\eqref{eq:P} sob
+condição de Landesman--Lazer local}, nem uma adaptação da redução de
+Lyapunov--Schmidt de~\cite{RezendeSanchezSilva2019} ao caso não local em
+domínios limitados. Essa é a lacuna que o roteiro anexo pretende preencher, e
+as Seções~\ref{sec:espectro}--\ref{sec:LL-kirchhoff} discutem como fazê-lo de
+modo consistente.
+
+\begin{table}[ht]
+\centering
+\small
+\caption{Resumo das principais linhas de pesquisa citadas.}\label{tab:resumo}
+\begin{tabular}{@{}L{3.6cm}L{5.0cm}L{5.4cm}@{}}
+\toprule
+\textbf{Tema} & \textbf{Ferramentas} & \textbf{Referências}\\
+\midrule
+Origem e caso evolutivo & análise funcional, Galerkin & \cite{Kirchhoff1883,Carrier1945,Bernstein1940,Pohozaev1975,Lions1978,ArosioPanizzi1996,DanconaSpagnolo1992}\\
+Primeiros resultados elípticos & ponto fixo, passo da montanha, truncamento de $M$ & \cite{AlvesCorrea2001,MaRivera2003,AlvesCorreaMa2005,Ma2005}\\
+Índices e soluções nodais & índice de Yang, Morse, fluxo invariante & \cite{PereraZhang2006,ZhangPerera2006,MaoZhang2009,HeZou2009}\\
+Parâmetros e Nehari & princípios de três pontos críticos, Nehari & \cite{Ricceri2010,ChenKuoWu2011}\\
+Crescimento crítico & concentração-compacidade, truncamento & \cite{AlvesCorreaFigueiredo2010,Figueiredo2013,Naimen2014}\\
+$\R^N$ e fracionário & Pohožaev--Nehari, penalização & \cite{HeZou2012,LiYe2014,FiscellaValdinoci2014,AutuoriFiscellaPucci2015}\\
+Bifurcação & Crandall--Rabinowitz, Rabinowitz global & \cite{AmbrosettiArcoya2017,SantosJuniorSiciliano2018,CintraEtAl2020}\\
+Ressonância & linking, Ekeland & \cite{BensedikBouchekif2009,SunTang2013,SongTangChen2015}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+%=====================================================================
+\section{A teoria de Landesman--Lazer no caso semilinear}\label{sec:LL}
+%=====================================================================
+
+\subsection{A condição clássica}
+
+Considere o problema ressonante
+\begin{equation}\label{eq:LL-classico}
+-\Delta u=\lambda_1u+g(x,u)\quad\text{em }\Omega,\qquad u=0\ \text{sobre }\partial\Omega,
+\end{equation}
+com $g$ limitada e com limites $g_\pm(x)=\lim_{s\to\pm\infty}g(x,s)$. Testando
+com $\varphi_1$, toda solução satisfaz $\int_\Omega g(x,u)\varphi_1\dx=0$; a
+parte linear não dá nenhum controle na direção de $\varphi_1$, e a
+solubilidade depende inteiramente de $g$. Landesman e
+Lazer~\cite{LandesmanLazer1970} mostraram que~\eqref{eq:LL-classico} tem solução
+quando
+\begin{equation}\label{eq:condicao-LL}
+\int_\Omega g_+\varphi_1\dx<0<\int_\Omega g_-\varphi_1\dx
+\qquad\text{ou}\qquad
+\int_\Omega g_-\varphi_1\dx<0<\int_\Omega g_+\varphi_1\dx .
+\end{equation}
+A interpretação é simples: ao longo de $u=t\varphi_1$, com $\abs{t}$ grande, o
+termo $\int g(x,t\varphi_1)\varphi_1$ muda de sinal entre $t=-\infty$ e
+$t=+\infty$, e um argumento de grau (ou de valor intermediário depois de uma
+redução) produz um zero. Ahmad, Lazer e Paul~\cite{AhmadLazerPaul1976}
+deram a versão variacional: no primeiro caso de~\eqref{eq:condicao-LL} o
+funcional é coercivo e tem mínimo; no segundo, tem geometria de ponto de sela.
+Rabinowitz~\cite{Rabinowitz1986} sistematizou essas geometrias, e
+Silva~\cite{Silva1991} desenvolveu teoremas de linking adequados a ressonância
+em autovalores superiores. Arcoya e Gámez~\cite{ArcoyaGamez2001} relacionaram
+condições de Landesman--Lazer com a direção da bifurcação a partir do infinito
+e com o princípio do antimáximo, ponto de vista que será útil na
+Subseção~\ref{subsec:bif-infinito}.
+
+\subsection{A condição local de Rezende--Sánchez-Aguilar--Silva}\label{subsec:LL-local}
+
+Rezende, Sánchez-Aguilar e Silva~\cite{RezendeSanchezSilva2019} (ver também a
+tese~\cite{SanchezAguilar2017}) observaram que a condição de Landesman--Lazer não
+precisa olhar para o infinito. Para o problema
+\begin{equation}\label{eq:RSS}
+-\Delta u=\lambda u+\mu f(x,u)\quad\text{em }\Omega,\qquad u=0\ \text{sobre }\partial\Omega,
+\end{equation}
+basta que $t\mapsto\int_\Omega f(x,t\varphi_1)\varphi_1\dx$ mude de sinal num
+intervalo limitado. As hipóteses, na forma resumida no roteiro anexo, são:
+\begin{description}[leftmargin=2.6em,style=nextline]
+\item[$(H_0^+)$] existem $t_1<t_2$ tais que
+$\int_\Omega f(x,t_1\varphi_1)\varphi_1\dx>0>\int_\Omega f(x,t_2\varphi_1)\varphi_1\dx$;
+\item[$(H_0^-)$] existem $t_1<t_2$ tais que
+$\int_\Omega f(x,t_1\varphi_1)\varphi_1\dx<0<\int_\Omega f(x,t_2\varphi_1)\varphi_1\dx$;
+\item[$(H_0)$] existem $t_1<\cdots<t_{k+1}$ tais que
+$\Bigl(\int_\Omega f(x,t_i\varphi_1)\varphi_1\dx\Bigr)\Bigl(\int_\Omega f(x,t_{i+1}\varphi_1)\varphi_1\dx\Bigr)<0$,
+$i=1,\dots,k$;
+\item[$(F_1)$] $f$ é localmente $L^\sigma$-limitada, com $\sigma>\max\{N/2,1\}$;
+\item[$(F_2)$] $f$ é localmente $L^\sigma$-Lipschitz em $s$.
+\end{description}
+Não se impõe crescimento algum em $f$ no infinito. Em linhas gerais, os
+resultados de~\cite{RezendeSanchezSilva2019} afirmam que existem $\mu^*,\nu^*>0$
+tais que, para $0<\mu<\mu^*$ e $\abs{\lambda-\lambda_1}<\mu\nu^*$, o
+problema~\eqref{eq:RSS} tem uma solução $u=t\varphi_1+v$ com $t\in(t_1,t_2)$
+(sob $(H_0^+)$ e $(F_1)$, ou sob $(H_0^-)$, $(F_1)$ e $(F_2)$), e $k$ soluções
+sob $(H_0)$. O artigo traz ainda resultados de não existência, aplicações a não
+linearidades polinomiais e a pontos de bifurcação; remetemos a ele para os
+enunciados precisos.
+
+A escala $\abs{\lambda-\lambda_1}<\mu\nu^*$ tem uma explicação direta. Projetando
+a equação em $\varphi_1$ obtém-se
+\[
+(\lambda_1-\lambda)\,t=\mu\int_\Omega f(x,t\varphi_1+v)\varphi_1\dx .
+\]
+Se $v$ é pequeno, o lado direito é da ordem de $\mu$, e para que o sinal seja
+ditado pela integral (isto é, por $(H_0^\pm)$), o lado esquerdo precisa ser
+$o(\mu)$ uniformemente em $t\in[t_1,t_2]$, o que se garante com
+$\abs{\lambda-\lambda_1}\le\nu^*\mu$ e $\nu^*$ pequeno.
+
+A estratégia técnica, que o roteiro anexo propõe reproduzir, tem três etapas:
+(i) truncar $f$ fora de $[-S,S]$, com $S$ maior que
+$\max\{\abs{t_1},\abs{t_2}\}\abs{\varphi_1}_\infty$ mais uma folga;
+(ii) resolver a equação em $v$ por minimização (sob $(H_0^+)$) ou por ponto fixo
+(sob $(H_0^-)$, onde a hipótese de Lipschitz $(F_2)$ é usada), no conjunto
+$C=\{t\varphi_1+v:\ t\in[t_1,t_2],\ v\perp\varphi_1\}$;
+(iii) provar, por \emph{bootstrap} com $\sigma>N/2$, que
+$\abs{v}_\infty\to0$ quando $\mu\to0$, de modo que $\abs{u}_\infty\le S$ e o
+truncamento não altera a equação. Arcoya, Rezende e
+Silva~\cite{ArcoyaRezendeSilva2019} estenderam a teoria ao $p$-Laplaciano, caso
+em que a decomposição ortogonal não está disponível.
+
+%=====================================================================
+\section{O problema linear de Kirchhoff}\label{sec:espectro}
+%=====================================================================
+
+Esta seção contém a observação estrutural mais importante do texto. Ela é
+elementar, mas não a encontramos formulada desta maneira nas referências
+consultadas, e ela determina como a ressonância deve ser entendida
+em~\eqref{eq:P}.
+
+\subsection{Redução a um problema semilinear com vínculo}
+
+\begin{proposicao}\label{prop:reducao}
+Suponha que $M$ seja contínua e positiva em $(0,\infty)$. Uma função
+$u\in H\setminus\{0\}$ é solução fraca de~\eqref{eq:P} se, e somente se, existe
+$s>0$ tal que
+\begin{equation}\label{eq:reducao}
+-\Delta u=\frac{\lambda}{M(s)}\,u+\frac{\mu}{M(s)}\,f(x,u)\quad\text{em }\Omega,
+\qquad u\in H,\qquad\text{e}\qquad \norm{u}^2=s .
+\end{equation}
+Se, além disso, $M(0)>0$, o mesmo vale para $u=0$ com $s=0$.
+\end{proposicao}
+
+\begin{proof}
+Se $u$ resolve~\eqref{eq:P}, basta tomar $s=\norm{u}^2$ e dividir a formulação
+fraca por $M(s)>0$. Reciprocamente, se $u$ satisfaz~\eqref{eq:reducao}, então
+$M(\norm{u}^2)=M(s)$ e, multiplicando por $M(s)$, $u$ resolve~\eqref{eq:P}.
+\end{proof}
+
+Assim, resolver~\eqref{eq:P} equivale a encontrar um ponto fixo da aplicação
+escalar $s\mapsto\norm{u_s}^2$, em que $u_s$ é uma solução (escolhida de forma
+contínua, quando possível) do problema semilinear com parâmetros
+$(\lambda/M(s),\mu/M(s))$. Essa é a ideia por trás das mudanças de variáveis
+usadas em~\cite{CintraEtAl2020,SantosJuniorSiciliano2018}. Ela se aplica também
+ao caso degenerado $M(0)=0$, desde que se procurem soluções não triviais.
+
+\subsection{O ``espectro'' de Kirchhoff}
+
+Tomando $\mu=0$, a Proposição~\ref{prop:reducao} descreve completamente o
+problema linear.
+
+\begin{proposicao}\label{prop:espectro}
+Suponha $M$ contínua e positiva em $(0,\infty)$. Para $\lambda\in\R$ e
+$u\in H\setminus\{0\}$, são equivalentes:
+\begin{enumerate}[label=(\roman*)]
+\item $u$ é solução fraca de $-M(\norm{u}^2)\Delta u=\lambda u$ em $\Omega$,
+$u=0$ sobre $\partial\Omega$;
+\item existe $k$ tal que $u\in E(\lambda_k)\setminus\{0\}$ e
+$\lambda=\lambda_k\,M(\norm{u}^2)$.
+\end{enumerate}
+Em particular, o conjunto dos $\lambda$ para os quais existe solução não trivial é
+\begin{equation}\label{eq:espectro}
+\Sigma_M=\bigcup_{k\ge1}\lambda_k\,M\bigl((0,\infty)\bigr),
+\end{equation}
+e, para cada $\lambda\in\Sigma_M$, o conjunto de soluções não triviais é a união,
+sobre os pares $(\Lambda,s)$ com $\Lambda\in\spec(-\Delta)$, $s>0$ e
+$\Lambda M(s)=\lambda$, das esferas
+$\{u\in E(\Lambda):\ \norm{u}^2=s\}$.
+\end{proposicao}
+
+\begin{proof}
+Por~\eqref{eq:reducao} com $\mu=0$, $u\ne0$ resolve o problema se e somente se
+$u$ é autofunção de $-\Delta$ com autovalor $\lambda/M(s)$, $s=\norm{u}^2$. As
+demais afirmações seguem disso. Como $M$ é contínua, cada
+$\lambda_kM((0,\infty))$ é um intervalo.
+\end{proof}
+
+A diferença em relação ao caso semilinear é grande. Se $M\equiv m$ é
+constante, $\Sigma_M=m\,\spec(-\Delta)$ é discreto. Se $M$ não é constante,
+cada autovalor $\lambda_k$ gera um \emph{intervalo} de valores ressonantes, e
+para cada $\lambda$ nesse intervalo o conjunto de soluções é uma esfera de raio
+determinado por $\lambda$, não uma reta.
+
+\begin{exemplo}[Kirchhoff clássico]\label{ex:classico}
+Para $M(t)=a+bt$, com $a,b>0$, tem-se $M((0,\infty))=(a,\infty)$ e
+$\Sigma_M=(a\lambda_1,\infty)$. Todo $\lambda>a\lambda_1$ é ``ressonante''. Se
+$a\lambda_k<\lambda$, as soluções em $E(\lambda_k)$ são as de norma
+\[
+\norm{u}^2=s_k(\lambda)=\frac{\lambda-a\lambda_k}{b\lambda_k}.
+\]
+Para $\lambda_1$, que é simples, isso dá exatamente duas soluções,
+$\pm t_\lambda\varphi_1$, com $t_\lambda^2=s_1(\lambda)/\lambda_1$.
+\end{exemplo}
+
+\begin{exemplo}[caso degenerado]\label{ex:degenerado}
+Para $M(t)=bt$, $\Sigma_M=(0,\infty)$ e
+$s_k(\lambda)=\lambda/(b\lambda_k)$ para todo $k$: cada $\lambda>0$ produz
+soluções em \emph{todos} os autoespaços.
+\end{exemplo}
+
+\begin{exemplo}[$M$ limitada]\label{ex:limitada}
+Para $M(t)=a+b\,t/(1+t)$, com $a,b>0$, tem-se $M((0,\infty))=(a,a+b)$ e
+$\Sigma_M=\bigcup_k(a\lambda_k,(a+b)\lambda_k)$. Se $(a+b)\lambda_k<a\lambda_{k+1}$,
+esse conjunto tem lacunas, e os extremos $a\lambda_k=M(0)\lambda_k$ e
+$(a+b)\lambda_k=m_\infty\lambda_k$ desempenham o papel de pontos de bifurcação
+a partir de zero e do infinito, respectivamente
+(Subseções~\ref{subsec:bif-zero} e~\ref{subsec:bif-infinito}).
+\end{exemplo}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}[scale=1.0]
+ % eixo
+ \draw[->] (0,0) -- (7.2,0) node[below] {$s=\norm{u}^2$};
+ \draw[->] (0,0) -- (0,5.6) node[left] {$\lambda$};
+ % caso a+bs : lambda_k (a + b s), a=1, b=0.35, lambda1=1, lambda2=2.2, lambda3=3.6
+ \draw[thick,blue!70!black,domain=0:6.8] plot (\x,{1*(1+0.35*\x)}) node[right] {\small$\lambda_1M(s)$};
+ \draw[thick,red!70!black,domain=0:4.2] plot (\x,{2.2*(1+0.35*\x)}) node[right] {\small$\lambda_2M(s)$};
+ \draw[thick,green!50!black,domain=0:1.95] plot (\x,{3.6*(1+0.35*\x)}) node[right] {\small$\lambda_3M(s)$};
+ % nivel lambda
+ \draw[dashed] (0,4.0) -- (7,4.0) node[right] {$\lambda$};
+ \fill[blue!70!black] ({(4.0/1-1)/0.35},4.0) circle (1.6pt);
+ \fill[red!70!black] ({(4.0/2.2-1)/0.35},4.0) circle (1.6pt);
+ \fill[green!50!black] ({(4.0/3.6-1)/0.35},4.0) circle (1.6pt);
+ \draw[dotted] ({(4.0/1-1)/0.35},4.0) -- ({(4.0/1-1)/0.35},0) node[below] {\small$s_1$};
+ \draw[dotted] ({(4.0/2.2-1)/0.35},4.0) -- ({(4.0/2.2-1)/0.35},0) node[below] {\small$s_2$};
+ \draw[dotted] ({(4.0/3.6-1)/0.35},4.0) -- ({(4.0/3.6-1)/0.35},0) node[below] {\small$s_3$};
+ % pontos M(0)lambda_k
+ \node[left] at (0,1) {\small$a\lambda_1$};
+ \node[left] at (0,2.2) {\small$a\lambda_2$};
+ \node[left] at (0,3.6) {\small$a\lambda_3$};
+\end{tikzpicture}
+\caption{Curvas $s\mapsto\lambda_kM(s)$ para $M(s)=a+bs$. Para um nível
+$\lambda$ fixado, cada interseção $\lambda_kM(s_k)=\lambda$ corresponde a uma
+esfera de soluções de $-M(\norm{u}^2)\Delta u=\lambda u$ em $E(\lambda_k)$, de
+raio $\sqrt{s_k}$. Os valores $M(0)\lambda_k=a\lambda_k$ são os pontos de
+bifurcação a partir de zero.}\label{fig:espectro}
+\end{figure}
+
+\subsection{Não degenerescência}
+
+O próximo lema mostra que, em geral, as soluções do problema linear de
+Kirchhoff são pontos críticos não degenerados, ao contrário do que ocorre no
+caso semilinear ressonante.
+
+\begin{lema}\label{lema:naodeg}
+Seja $M\in C^1([0,\infty))$ positiva e defina
+$A\colon H\to\Hm$ por $A(u)=M(\norm{u}^2)(-\Delta u)-\lambda u$. Seja
+$\lambda_k$ um autovalor simples, $t\ne0$, $u_0=t\varphi_k$,
+$s_0=\norm{u_0}^2=\lambda_kt^2$, e suponha $\lambda=\lambda_kM(s_0)$, de modo que
+$A(u_0)=0$. Então $A'(u_0)\colon H\to\Hm$ é um isomorfismo se, e somente se,
+$M'(s_0)\ne0$.
+\end{lema}
+
+\begin{proof}
+Para $h\in H$,
+\[
+A'(u)h=M(\norm{u}^2)(-\Delta h)+2M'(\norm{u}^2)\langle u,h\rangle(-\Delta u)-\lambda h .
+\]
+Escreva $h=\alpha\varphi_k+w$, com $w\perp\varphi_k$. Por~\eqref{eq:normalizacao},
+$\langle u_0,h\rangle=t\alpha\lambda_k$ e $-\Delta u_0=t\lambda_k\varphi_k$. Como
+$\lambda=\lambda_kM(s_0)$, os termos em $\alpha\varphi_k$ vindos de
+$M(s_0)(-\Delta)-\lambda$ se cancelam, e resta
+\begin{equation}\label{eq:linearizacao}
+A'(u_0)h=\underbrace{M(s_0)\bigl(-\Delta w-\lambda_kw\bigr)}_{\in\,\langle\varphi_k\rangle^\perp}
+\;+\;2M'(s_0)\,s_0\lambda_k\,\alpha\,\varphi_k .
+\end{equation}
+As duas parcelas estão em subespaços complementares invariantes por $-\Delta$.
+Como $\lambda_k$ é simples, $-\Delta-\lambda_k$ é injetivo em
+$\langle\varphi_k\rangle^\perp$. Logo $A'(u_0)h=0$ implica $w=0$ e
+$M'(s_0)\alpha=0$. Se $M'(s_0)\ne0$, o núcleo é trivial; como
+$A'(u_0)=M(s_0)(-\Delta)+K$, com $K$ compacto, $A'(u_0)$ é Fredholm de índice
+zero e, portanto, um isomorfismo. Se $M'(s_0)=0$, então $\varphi_k$ está no
+núcleo.
+\end{proof}
+
+\begin{observacao}\label{obs:naodeg-zero}
+Na origem, $A'(0)=M(0)(-\Delta)-\lambda$, que é um isomorfismo se e somente se
+$\lambda\notin M(0)\,\spec(-\Delta)$. Se $\lambda_k$ não é simples, o
+núcleo de $A'(u_0)$ contém as direções tangentes à esfera
+$\{u\in E(\lambda_k):\norm{u}^2=s_0\}$, e a análise passa a ser equivariante
+(ou exige uma redução a uma variedade de dimensão $\dim E(\lambda_k)-1$).
+\end{observacao}
+
+\begin{observacao}\label{obs:energia}
+O mesmo fenômeno aparece na energia. Ao longo de $t\varphi_1$,
+$J(t):=I_{\lambda,0}(t\varphi_1)=\frac12\Mh(\lambda_1t^2)-\frac{\lambda}{2}t^2$
+satisfaz $J'(t)=\bigl(\lambda_1M(\lambda_1t^2)-\lambda\bigr)t$ e, em
+$t=t_\lambda$, $J''(t_\lambda)=2\lambda_1^2t_\lambda^2M'(s_\lambda)$. Se $M$ é
+estritamente crescente, $M'(s_\lambda)>0$ e
+$M(0)\lambda_1<\lambda<m_0\lambda_2$, então, por~\eqref{eq:coercividade-v}, os pontos $\pm t_\lambda\varphi_1$
+são mínimos globais estritos e não degenerados de $I_{\lambda,0}$, e a origem é
+um ponto de sela. No caso semilinear ressonante, ao contrário, $I$ é constante
+ao longo de toda a reta $\R\varphi_1$.
+\end{observacao}
+
+%=====================================================================
+\section{Consequências para o problema perturbado}\label{sec:consequencias}
+%=====================================================================
+
+\subsection{Multiplicidade perturbativa sem condição de Landesman--Lazer}
+
+Para enunciar o resultado, suponha que $f$ seja de classe $C^1$ em $s$ com
+\begin{equation}\label{eq:crescimento-C1}
+\abs{f(x,s)}\le C(1+\abs{s}^{p-1}),\qquad \abs{f_s(x,s)}\le C(1+\abs{s}^{p-2}),
+\qquad 2\le p<2^* ,
+\end{equation}
+de modo que o operador de Nemytskii $N_f(u)=f(\cdot,u)$ é de classe $C^1$ de
+$H$ em $\Hm$. Para $\lambda>0$, defina
+\[
+\mathcal{S}(\lambda)=\bigl\{(k,s):\ \lambda_k\ \text{simples},\ s>0,\
+\lambda_kM(s)=\lambda,\ M'(s)\ne0\bigr\}.
+\]
+
+\begin{teorema}\label{teo:multiplicidade}
+Suponha $(M_1)$, $M\in C^1([0,\infty))$ e~\eqref{eq:crescimento-C1}. Seja
+$\lambda>0$ com $\lambda\notin M(0)\spec(-\Delta)$ e seja
+$\mathcal{S}'\subset\mathcal{S}(\lambda)$ finito. Então existe $\mu_0>0$ tal
+que, para $\abs{\mu}<\mu_0$, o problema~\eqref{eq:P} tem pelo menos
+$1+2\,\#\mathcal{S}'$ soluções fracas distintas. Elas dependem continuamente de
+$\mu$ e, quando $\mu\to0$, convergem em $H$ para $0$ e para
+$\pm\sqrt{s/\lambda_k}\,\varphi_k$, $(k,s)\in\mathcal{S}'$.
+\end{teorema}
+
+\begin{proof}
+Defina $G\colon\R\times H\to\Hm$ por $G(\mu,u)=A(u)-\mu N_f(u)$, com $A$ como no
+Lema~\ref{lema:naodeg}. Então $G$ é de classe $C^1$, e os zeros de
+$G(\mu,\cdot)$ são as soluções de~\eqref{eq:P}. Os pontos $u_0=0$ e
+$u_0=\pm\sqrt{s/\lambda_k}\,\varphi_k$, $(k,s)\in\mathcal{S}'$, satisfazem
+$G(0,u_0)=0$, e $D_uG(0,u_0)=A'(u_0)$ é um isomorfismo, pela
+Observação~\ref{obs:naodeg-zero} (na origem) e pelo Lema~\ref{lema:naodeg} (nos
+demais). Pelo teorema da função implícita, para cada um desses pontos existem
+vizinhanças $U$ de $u_0$ e $(-\mu_{u_0},\mu_{u_0})$ de $0$ e uma curva contínua
+$\mu\mapsto u(\mu)\in U$ de zeros de $G$. Os pontos são distintos e em número
+finito; escolhendo as vizinhanças disjuntas e $\mu_0=\min\mu_{u_0}$, obtêm-se as
+soluções procuradas.
+\end{proof}
+
+\begin{corolario}\label{cor:classico}
+Seja $M(t)=a+bt$, $a,b>0$, $f$ satisfazendo~\eqref{eq:crescimento-C1}, e
+$\lambda>a\lambda_1$ com $\lambda\notin a\,\spec(-\Delta)$. Se todos os
+autovalores $\lambda_k<\lambda/a$ são simples (por exemplo, se $N=1$), então,
+para $\abs{\mu}$ pequeno,~\eqref{eq:P} tem pelo menos
+$1+2\,\#\{k:\ a\lambda_k<\lambda\}$ soluções. Se $f(x,0)=0$, pelo menos
+$2\,\#\{k:\ a\lambda_k<\lambda\}$ delas são não triviais.
+\end{corolario}
+
+\begin{observacao}
+O Teorema~\ref{teo:multiplicidade} não usa condição alguma sobre o sinal de
+$\int f(x,t\varphi_1)\varphi_1$. A razão é o Lema~\ref{lema:naodeg}: quando
+$M'(s_\lambda)\ne0$, o termo não local remove a degenerescência na direção
+$\varphi_1$. Em particular, para $M$ estritamente monótona e $\lambda$ fixo,
+uma condição de Landesman--Lazer local é \emph{desnecessária} para obter
+soluções perto de $\pm t_\lambda\varphi_1$ quando $\mu\to0$. O preço é que
+$\mu_0$ depende de $\abs{M'(s_\lambda)}$, e a estimativa se degrada quando
+$M'(s_\lambda)\to0$.
+\end{observacao}
+
+\begin{observacao}[positividade]
+Se $f$ for regular o bastante para que a convergência $u(\mu)\to t_\lambda\varphi_1$
+valha em $C^1(\overline\Omega)$ (por exemplo, via estimativas $W^{2,q}$ com
+$q>N$; ver~\cite{GilbargTrudinger2001}), então $u(\mu)>0$ em $\Omega$ para
+$\mu$ pequeno, pois $\varphi_1>0$ e $\partial_\nu\varphi_1<0$ em $\partial\Omega$.
+\end{observacao}
+
+\begin{observacao}[hipóteses locais]
+A hipótese~\eqref{eq:crescimento-C1} pode ser enfraquecida para hipóteses
+locais do tipo $(F_1)$--$(F_2)$ trabalhando, em vez de $H$, num espaço que
+imerge em $C(\overline\Omega)$, como $W^{2,\sigma}(\Omega)\cap W^{1,\sigma}_0(\Omega)$
+com $\sigma>N/2$, ou truncando $f$ e usando estimativas $L^\infty$ como
+em~\cite{RezendeSanchezSilva2019}. Os detalhes não foram verificados aqui.
+\end{observacao}
+
+\subsection{Bifurcação a partir de zero}\label{subsec:bif-zero}
+
+Considere agora
+\begin{equation}\label{eq:P-bif}
+-M(\norm{u}^2)\Delta u=\lambda u+g(x,u),\qquad g(x,s)=o(\abs{s})\ \text{quando }s\to0,
+\end{equation}
+com $g$ de crescimento subcrítico. Seja $K=(-\Delta)^{-1}$, que é compacto como
+operador de $H$ em $H$ quando composto com a imersão $H\hookrightarrow L^2$.
+
+\begin{proposicao}\label{prop:bif-zero}
+Suponha $M$ contínua com $M(0)>0$. Se $\lambda_k$ tem multiplicidade
+geométrica ímpar, então $(\Lambda_k,0)$, com $\Lambda_k=M(0)\lambda_k$, é ponto
+de bifurcação de~\eqref{eq:P-bif}, e dele emana um contínuo de soluções que é
+ilimitado em $\R\times H$ ou retorna ao eixo trivial em outro ponto
+$(\Lambda_j,0)$, $j\ne k$. Se $\lambda\notin M(0)\spec(-\Delta)$, então
+$(\lambda,0)$ não é ponto de bifurcação.
+\end{proposicao}
+
+\begin{proof}
+Pela Proposição~\ref{prop:reducao}, $u$ resolve~\eqref{eq:P-bif} se e somente se
+\[
+u=\frac{\lambda}{M(0)}Ku+\mathcal{H}(\lambda,u),\qquad
+\mathcal{H}(\lambda,u)=\lambda\Bigl(\frac{1}{M(\norm{u}^2)}-\frac{1}{M(0)}\Bigr)Ku
++\frac{1}{M(\norm{u}^2)}K\,g(\cdot,u).
+\]
+A aplicação $\mathcal{H}$ é compacta e, pela continuidade de $M$ em $0$ e por
+$g=o(\abs{s})$, satisfaz $\mathcal{H}(\lambda,u)=o(\norm{u})$ uniformemente para
+$\lambda$ em compactos. O resultado segue do teorema de bifurcação global de
+Rabinowitz~\cite{Rabinowitz1971} aplicado ao parâmetro $\lambda/M(0)$. A
+última afirmação segue do teorema da função implícita
+(Observação~\ref{obs:naodeg-zero}).
+\end{proof}
+
+Para $k=1$, e restringindo-se a soluções positivas, esse é o resultado de
+Ambrosetti e Arcoya~\cite{AmbrosettiArcoya2017} citado na
+Seção~\ref{sec:panorama}. Se $\lambda_k$ é simples, o teorema de
+Crandall--Rabinowitz~\cite{CrandallRabinowitz1971} dá, além disso, uma curva
+local de soluções da forma $u=\tau\varphi_k+o(\tau)$, $\lambda=\lambda(\tau)$.
+A direção da bifurcação (subcrítica ou supercrítica) é decidida pela
+competição entre $M'(0)$ e o comportamento de $g$ perto de zero. Por exemplo,
+se $g(x,s)=c\abs{s}^{p-2}s$ com $p>2$, a projeção em $\varphi_1$ dá, em
+primeira ordem,
+\[
+\lambda(\tau)-\Lambda_1\approx M'(0)\lambda_1^2\tau^2
+-c\,\abs{\tau}^{p-2}\int_\Omega\varphi_1^{p}\dx,
+\]
+e o termo dominante depende de $p<4$, $p=4$ ou $p>4$. O expoente $4$ aparece
+aqui pela mesma razão que no problema~\eqref{eq:autovalor-PZ}.
+
+\subsection{Bifurcação a partir do infinito e ressonância no infinito}\label{subsec:bif-infinito}
+
+Suponha agora $(M_\infty)$, isto é, $M(t)\to m_\infty\in(0,\infty)$, e
+$g$ limitada, ou mais geralmente $g(x,s)=o(\abs{s})$ quando
+$\abs{s}\to\infty$.
+
+\begin{proposicao}\label{prop:bif-infinito}
+Sob $(M_1)$ e $(M_\infty)$, se $\lambda_k$ tem multiplicidade geométrica
+ímpar, então $m_\infty\lambda_k$ é ponto de bifurcação a partir do infinito
+para~\eqref{eq:P-bif}: existe um contínuo de soluções $(\lambda,u)$ com
+$\norm{u}\to\infty$ e $\lambda\to m_\infty\lambda_k$.
+\end{proposicao}
+
+\begin{proof}
+Escreva $u=\frac{\lambda}{m_\infty}Ku+\widetilde{\mathcal{H}}(\lambda,u)$ com
+$\widetilde{\mathcal{H}}(\lambda,u)=\lambda\bigl(\frac{1}{M(\norm{u}^2)}-\frac{1}{m_\infty}\bigr)Ku
++\frac{1}{M(\norm{u}^2)}Kg(\cdot,u)$. Por $(M_\infty)$ e pela hipótese sobre $g$,
+$\widetilde{\mathcal{H}}(\lambda,u)=o(\norm{u})$ quando $\norm{u}\to\infty$,
+uniformemente para $\lambda$ em compactos. O resultado segue do teorema de
+bifurcação a partir do infinito de Rabinowitz~\cite{Rabinowitz1973}.
+\end{proof}
+
+É aqui que a condição de Landesman--Lazer clássica reaparece no problema de
+Kirchhoff. Ao longo do ramo, $u\approx t\varphi_1$ com $\abs{t}\to\infty$ e, ao
+projetar em $\varphi_1$,
+\begin{equation}\label{eq:direcao-infinito}
+\lambda-m_\infty\lambda_1\approx
+\lambda_1\bigl(M(\lambda_1t^2)-m_\infty\bigr)-\frac1t\int_\Omega g(x,t\varphi_1)\varphi_1\dx .
+\end{equation}
+Se $M(s)-m_\infty\sim c\,s^{-\alpha}$ quando $s\to\infty$, o primeiro termo é
+da ordem de $\abs{t}^{-2\alpha}$ e o segundo, da ordem de $\abs{t}^{-1}$, com
+sinal dado por $\int g_\pm\varphi_1$. Há três regimes:
+\begin{itemize}[nosep]
+\item $\alpha>1/2$: domina o termo de Landesman--Lazer, e a direção da
+bifurcação (e, portanto, a solubilidade em $\lambda=m_\infty\lambda_1$) é
+decidida por~\eqref{eq:condicao-LL}, como no caso semilinear~\cite{ArcoyaGamez2001};
+\item $\alpha<1/2$: domina o termo não local, e o sinal de $c$ decide;
+\item $\alpha=1/2$: os dois termos competem, e surge uma condição de
+Landesman--Lazer ``deslocada'' envolvendo $c$ e $\int g_\pm\varphi_1$.
+\end{itemize}
+Essa análise é heurística; sua formalização é um dos problemas propostos na
+Seção~\ref{sec:abertos}.
+
+\subsection{Patamares de \texorpdfstring{$M$}{M}: transferência do caso semilinear}
+
+Quando $M$ é constante num intervalo, o problema de Kirchhoff herda a
+ressonância semilinear e os resultados de~\cite{RezendeSanchezSilva2019} se
+transferem diretamente.
+
+\begin{proposicao}\label{prop:patamar}
+Suponha que $M\equiv m>0$ em $[\alpha,\beta]$, $0<\alpha<\beta$. Se $u$ é
+solução de $-m\Delta u=\lambda u+\mu f(x,u)$ com $\norm{u}^2\in[\alpha,\beta]$,
+então $u$ é solução de~\eqref{eq:P}. Em particular, se
+$\lambda_1[t_1^2,t_2^2]\subset(\alpha,\beta)$ (com $0\notin[t_1,t_2]$) e se as
+soluções $u_\mu=t_\mu\varphi_1+v_\mu$ dadas por~\cite{RezendeSanchezSilva2019}
+para o problema~\eqref{eq:RSS} com parâmetros $(\lambda/m,\mu/m)$ satisfazem
+$t_\mu\in(t_1,t_2)$ e $\norm{v_\mu}\to0$, então, para $\mu$ pequeno e
+$\abs{\lambda-m\lambda_1}<\mu\nu^*$, elas resolvem~\eqref{eq:P}.
+\end{proposicao}
+
+\begin{proof}
+A primeira afirmação é imediata, pois $M(\norm{u}^2)=m$. Para a segunda, basta
+notar que $\norm{u_\mu}^2=\lambda_1t_\mu^2+\norm{v_\mu}^2$
+por~\eqref{eq:pitagoras}, que pertence a $[\alpha,\beta]$ para $\mu$ pequeno.
+A escala em $\lambda$ resulta de
+$\abs{\lambda/m-\lambda_1}<(\mu/m)\nu^*$.
+\end{proof}
+
+A hipótese $\norm{v_\mu}\to0$ é típica das soluções obtidas por redução de
+Lyapunov--Schmidt, mas deve ser conferida no enunciado preciso
+de~\cite{RezendeSanchezSilva2019}.
+
+\subsection{Classificação dos regimes ressonantes}
+
+Juntando o que foi visto, a ressonância em~\eqref{eq:P} só é genuína nas
+seguintes situações:
+
+\begin{center}
+\small
+\begin{tabular}{@{}L{3.3cm}L{4.4cm}L{6.2cm}@{}}
+\toprule
+\textbf{Regime} & \textbf{Condição} & \textbf{Papel de uma condição de Landesman--Lazer}\\
+\midrule
+Bifurcação de zero & $\lambda\approx M(0)\lambda_k$ & direção da bifurcação; compete com $M'(0)$\\
+Bifurcação do infinito & $\lambda\approx m_\infty\lambda_k$, $(M_\infty)$ & LL clássica, deslocada pela taxa $M(s)-m_\infty$\\
+Dobra de $M$ & $\lambda=\lambda_kM(s_0)$, $M'(s_0)=0$ & LL \emph{pontual}: sinal de $\mu\int f(x,t_0\varphi_k)\varphi_k$ vs.\ $M''(s_0)$\\
+Patamar de $M$ & $M\equiv m$ em $[\alpha,\beta]$ & LL local de~\cite{RezendeSanchezSilva2019}, sem alteração\\
+\midrule
+Cruzamento transversal & $\lambda=\lambda_kM(s_0)$, $M'(s_0)\ne0$ & nenhum (Teorema~\ref{teo:multiplicidade})\\
+\bottomrule
+\end{tabular}
+\end{center}
+
+O caso de dobra merece uma formulação própria.
+
+\begin{conjectura}\label{conj:dobra}
+Suponha $M\in C^2$, $\lambda_1M(s_0)=\lambda$, $M'(s_0)=0$, $M''(s_0)\ne0$ e
+$t_0=\sqrt{s_0/\lambda_1}$. Seja $\gamma=\int_\Omega f(x,t_0\varphi_1)\varphi_1\dx\ne0$.
+Então, para $\abs{\mu}$ pequeno:
+\begin{enumerate}[label=(\alph*),nosep]
+\item se $\mu\gamma M''(s_0)>0$,~\eqref{eq:P} tem duas soluções próximas de
+$t_0\varphi_1$;
+\item se $\mu\gamma M''(s_0)<0$,~\eqref{eq:P} não tem soluções numa vizinhança
+fixa de $t_0\varphi_1$.
+\end{enumerate}
+\end{conjectura}
+
+\noindent\emph{Heurística.} Resolvendo a equação em $v$ (o que é possível,
+pois a parte em $\langle\varphi_1\rangle^\perp$ de~\eqref{eq:linearizacao}
+continua invertível), obtém-se $v=O(\mu)$ e a equação escalar
+$\Phi(t,\mu)=0$, com
+\[
+\Phi(t,\mu)=\bigl(\lambda_1M(\lambda_1t^2+\norm{v}^2)-\lambda\bigr)t-\mu\int_\Omega f(x,t\varphi_1+v)\varphi_1\dx .
+\]
+Como $M'(s_0)=0$, uma expansão de Taylor dá
+$\lambda_1t\bigl(M(\lambda_1t^2)-M(s_0)\bigr)\approx2\lambda_1^3t_0^3M''(s_0)(t-t_0)^2$, de
+modo que $\Phi(t,\mu)\approx2\lambda_1^3t_0^3M''(s_0)(t-t_0)^2-\mu\gamma$. A
+conclusão segue da análise da parábola. Falta controlar os termos de erro
+$O(\mu\abs{t-t_0})$, $O(\mu^2)$ e a dependência de $v$ em $t$. Trata-se de uma
+bifurcação do tipo sela-nó, e a condição de sinal em~(a) é uma condição de
+Landesman--Lazer \emph{pontual}.
+
+%=====================================================================
+\section{Uma condição de Landesman--Lazer local adaptada a Kirchhoff}\label{sec:LL-kirchhoff}
+%=====================================================================
+
+Os quatro regimes da tabela anterior podem ser tratados por uma única hipótese,
+formulada em termos da função escalar
+\begin{equation}\label{eq:Psi}
+\Psi_{\lambda,\mu}(t)=\bigl(\lambda_1M(\lambda_1t^2)-\lambda\bigr)t-\mu\int_\Omega f(x,t\varphi_1)\varphi_1\dx ,
+\end{equation}
+que é a equação bifurcada ``congelada'' em $v=0$.
+
+\begin{description}[leftmargin=2.6em,style=nextline]
+\item[$(KLL)$] Existem $t_1<t_2$ e $\delta>0$ tais que
+$\Psi_{\lambda,\mu}(t_1)\,\Psi_{\lambda,\mu}(t_2)<0$ e
+$\min\{\abs{\Psi_{\lambda,\mu}(t_1)},\abs{\Psi_{\lambda,\mu}(t_2)}\}\ge\delta\abs{\mu}$.
+\end{description}
+
+Note que $(KLL)$ envolve simultaneamente $M$, $\lambda$ e $f$. Nos casos
+particulares:
+\begin{itemize}[nosep]
+\item se $M\equiv m$ em $\lambda_1[t_1^2,t_2^2]$ e $\abs{\lambda-m\lambda_1}\le\nu\abs{\mu}$
+com $\nu$ pequeno, $(KLL)$ se reduz a $(H_0^\pm)$;
+\item se $\lambda_1M(\lambda_1t^2)-\lambda$ muda de sinal transversalmente em
+$t_\lambda\in(t_1,t_2)$ e $\abs{\mu}$ é pequeno, $(KLL)$ vale automaticamente
+para quaisquer $t_1<t_\lambda<t_2$ próximos, o que recupera o
+Teorema~\ref{teo:multiplicidade} (com $k=1$);
+\item numa dobra, $(KLL)$ vale exatamente na situação~(a) da
+Conjectura~\ref{conj:dobra}.
+\end{itemize}
+
+\begin{proposicao}[esboço]\label{prop:KLL}
+Suponha $(M_1)$, $M$ localmente Lipschitz, $(F_1)$, $(F_2)$, $0\notin[t_1,t_2]$
+e a lacuna espectral
+\begin{equation}\label{eq:lacuna}
+\lambda<m_0\lambda_2 .
+\end{equation}
+Então existe $\mu^*>0$ tal que, se $0<\abs{\mu}<\mu^*$ e $(KLL)$ vale com
+constantes $\delta$ e $t_1,t_2$ independentes de $\mu$, o problema~\eqref{eq:P}
+tem uma solução $u=t\varphi_1+v$ com $t\in(t_1,t_2)$ e $\abs{v}_\infty=O(\abs{\mu})$.
+\end{proposicao}
+
+\noindent\emph{Roteiro de demonstração.}
+\begin{enumerate}[label=\arabic*.,nosep]
+\item \emph{Truncamento.} Fixe $S>\max\{\abs{t_1},\abs{t_2}\}\,\abs{\varphi_1}_\infty+1$ e
+substitua $f$ por
+\[
+f_S(x,s)=f\bigl(x,\max\{-S,\min\{s,S\}\}\bigr),
+\]
+que, por $(F_1)$--$(F_2)$, é limitada por uma função de $L^\sigma$ e
+Lipschitz em $s$.
+\item \emph{Equação em $v$.} Para $t\in[t_1,t_2]$, procure $v\perp\varphi_1$ com
+\[
+M(\lambda_1t^2+\norm{v}^2)(-\Delta v)-\lambda v=\mu P^\perp f_S(x,t\varphi_1+v),
+\]
+em que $P^\perp$ é a projeção ortogonal (em $L^2$) sobre
+$\langle\varphi_1\rangle^\perp$. Pela lacuna~\eqref{eq:lacuna}, o operador
+$\mathcal{L}_\rho=M(\rho)(-\Delta)-\lambda$ é uniformemente invertível em
+$\langle\varphi_1\rangle^\perp$ para $\rho\ge0$, com
+$\norm{\mathcal{L}_\rho^{-1}}\le(m_0-\lambda/\lambda_2)^{-1}$ (em norma de $H$). Um
+argumento de ponto fixo de Banach na bola $\{\norm{v}\le R\abs{\mu}\}$ dá uma
+solução única $v=v(t,\mu)$, contínua em $t$, com $\norm{v}\le C\abs{\mu}$. Aqui
+se usam $(F_2)$ e o caráter Lipschitz de $M$ para controlar a dependência de
+$\mathcal{L}_\rho$ em $\rho=\lambda_1t^2+\norm{v}^2$.
+\item \emph{Estimativa $L^\infty$.} Como o lado direito está em $L^\sigma$ com
+$\sigma>N/2$, as estimativas de Stampacchia (ou o bootstrap
+de~\cite{RezendeSanchezSilva2019}) dão $\abs{v}_\infty\le C\abs{\mu}$. Para
+$\mu$ pequeno, $\abs{t\varphi_1+v}_\infty\le S$, e o truncamento é inativo.
+\item \emph{Equação escalar.} Projetando em $\varphi_1$, resta
+$\Phi(t,\mu)=0$, com
+$\Phi(t,\mu)=\Psi_{\lambda,\mu}(t)+R(t,\mu)$ e
+\[
+R(t,\mu)=\lambda_1t\bigl(M(\lambda_1t^2+\norm{v}^2)-M(\lambda_1t^2)\bigr)
+-\mu\int_\Omega\bigl(f(x,t\varphi_1+v)-f(x,t\varphi_1)\bigr)\varphi_1\dx .
+\]
+Pelo caráter Lipschitz de $M$ e por $(F_2)$, $\abs{R(t,\mu)}\le C\mu^2$
+uniformemente em $[t_1,t_2]$. Para $\abs{\mu}<\delta/C$, $(KLL)$ garante que
+$\Phi(t_1,\mu)$ e $\Phi(t_2,\mu)$ têm sinais opostos, e o teorema do valor
+intermediário fornece $t\in(t_1,t_2)$ com $\Phi(t,\mu)=0$.
+\end{enumerate}
+
+\noindent\emph{Lacunas a verificar.} (a) A inversibilidade uniforme no passo 2
+foi verificada apenas em $H$; o controle em $L^\infty$ do passo 3 deve ser feito
+com as constantes explícitas. (b) Sob $(H_0^+)$ e apenas $(F_1)$, sem
+Lipschitz, o passo 2 não se aplica e é preciso substituí-lo por minimização no
+conjunto $C$, como em~\cite{RezendeSanchezSilva2019}; a
+desigualdade~\eqref{eq:coercividade-v} sugere que isso funciona sob a lacuna
+espectral, mas a continuidade de $t\mapsto v(t,\mu)$ se perde e o argumento de
+valor intermediário precisa ser trocado por um argumento variacional. (c) A
+exigência $0\notin[t_1,t_2]$ evita a degenerescência do fator $t$ em
+$\Psi_{\lambda,\mu}$; o caso $0\in(t_1,t_2)$ requer tratamento separado.
+
+\paragraph{Multiplicidade.} Sob uma versão de $(KLL)$ com $k+1$ pontos
+$t_1<\cdots<t_{k+1}$ e sinais alternados, o mesmo roteiro fornece $k$ soluções
+$u_i=\tilde t_i\varphi_1+v_i$ com $\tilde t_i\in(t_i,t_{i+1})$.
+
+\paragraph{Exemplo polinomial.} Para $f(x,s)=b_1(x)\abs{s}^{q-1}s+b_2(x)\abs{s}^{p-1}s$,
+com $p>q\ge1$ e $t>0$,
+\[
+\int_\Omega f(x,t\varphi_1)\varphi_1\dx=r_1t^q+r_2t^p,\qquad
+r_1=\int_\Omega b_1\varphi_1^{q+1}\dx,\quad r_2=\int_\Omega b_2\varphi_1^{p+1}\dx .
+\]
+Se $r_1r_2<0$, essa função se anula em $t_*=(-r_1/r_2)^{1/(p-q)}$ e muda de
+sinal ali. Com $M\equiv m$ perto de $\lambda_1t_*^2$, aplica-se a
+Proposição~\ref{prop:patamar}; com $M$ estritamente monótona, $(KLL)$ precisa
+ser verificada incluindo o termo $(\lambda_1M(\lambda_1t^2)-\lambda)t$, que
+desloca o zero de $\Psi_{\lambda,\mu}$.
+
+%=====================================================================
+\section{Comentários sobre o roteiro anexo}\label{sec:critica}
+%=====================================================================
+
+O roteiro \emph{Sugestões para um artigo sobre problema elíptico do tipo
+Kirchhoff com condição de Landesman--Lazer local} propõe estender os resultados
+de~\cite{RezendeSanchezSilva2019} ao problema~\eqref{eq:P}. A análise das
+seções anteriores leva aos comentários a seguir, em ordem de importância.
+
+\begin{enumerate}[label=\textbf{(\arabic*)},leftmargin=2.2em]
+\item \textbf{Equação bifurcada.} Na Seção~6.1 do roteiro, a equação projetada
+aparece como
+$M(t^2+\norm{v}^2)\,[t\lambda_1-\lambda t]=\mu\int f(x,t\varphi_1+v)\varphi_1$.
+A forma correta (com $\abs{\varphi_1}_2=1$) é
+\[
+\bigl[\lambda_1M(\lambda_1t^2+\norm{v}^2)-\lambda\bigr]\,t=\mu\int_\Omega f(x,t\varphi_1+v)\varphi_1\dx .
+\]
+A diferença não é cosmética: na forma do roteiro, o lado esquerdo se anula em
+$\lambda=\lambda_1$ para qualquer $t$, como no caso semilinear; na forma
+correta, ele se anula apenas onde $\lambda_1M(\lambda_1t^2)=\lambda$. Isso muda
+toda a análise subsequente.
+\item \textbf{Normalização.} O roteiro escreve $M(\norm{u}^2)=M(t^2+\norm{v}^2)$,
+o que pressupõe $\norm{\varphi_1}=1$ em $H$, enquanto as condições $(H_0^\pm)$
+são formuladas com $\varphi_1$ normalizada em $L^2$ (como
+em~\cite{RezendeSanchezSilva2019}). É preciso escolher uma normalização e
+mantê-la; com $\abs{\varphi_1}_2=1$, vale~\eqref{eq:pitagoras}.
+\item \textbf{O parâmetro $\lambda_1^M$.} Os Teoremas~7.1--7.3 do roteiro usam
+$\abs{\lambda-\lambda_1^M}<\mu\nu^*$, com $\lambda_1^M$ ``dependendo de $M$ e da
+norma das soluções''. Pela Proposição~\ref{prop:espectro}, se $M$ não é
+constante, todo $\lambda\in\lambda_1M((0,\infty))$ é ressonante, e a condição
+como está escrita não tem significado preciso. As formulações consistentes são
+as da Seção~\ref{sec:consequencias} (patamar, dobra, bifurcação de zero ou do
+infinito) ou a hipótese unificada $(KLL)$ da Seção~\ref{sec:LL-kirchhoff}.
+\item \textbf{Quando $M$ é estritamente monótona.} Nesse caso, que inclui o
+modelo $M(t)=a+bt$ da Seção~8.1 do roteiro, o Teorema~\ref{teo:multiplicidade}
+mostra que existem soluções perto de $\pm t_\lambda\varphi_1$ para $\mu$ pequeno
+sem nenhuma condição de Landesman--Lazer. Um artigo que enuncie os
+Teoremas~7.1--7.3 para $M(t)=a+bt$ como aplicação de uma condição local estaria
+provando, com hipóteses mais fortes, algo que decorre do teorema da função
+implícita. Recomenda-se que o artigo explicite essa dicotomia e concentre a
+contribuição nos regimes genuinamente degenerados.
+\item \textbf{Observação 4.1 do roteiro.} A afirmação de que o valor crítico
+natural é $\lambda\approx M(t^2)\lambda_1$ está essencialmente certa, mas deve
+ser lida como $\lambda=\lambda_1M(\lambda_1t^2)$ e como uma curva de valores
+ressonantes, um para cada $t$, e não como um único valor.
+\item \textbf{Hipótese $(M_2)$.} Ela não intervém em nenhum dos resultados
+locais propostos e pode ser retirada dos enunciados, a menos que se busquem
+resultados globais.
+\item \textbf{Coercividade no conjunto $C$.} A Observação~5.1 do roteiro atribui
+a $(F_1)$ a coercividade em $C$. Na verdade, por~\eqref{eq:coercividade-v}, a
+coercividade na direção de $\langle\varphi_1\rangle^\perp$ vem de $(M_1)$ e da
+lacuna~\eqref{eq:lacuna}; $(F_1)$ só controla o termo perturbativo depois do
+truncamento. A lacuna espectral deve constar das hipóteses.
+\item \textbf{Ponto de bifurcação (Seção~8.3 do roteiro).} O ponto de
+bifurcação a partir da solução trivial é $M(0)\lambda_1$, e não um
+``$\lambda_1^M$'' dependente da norma
+(Proposição~\ref{prop:bif-zero}); para $M(t)=a+bt$, é $a\lambda_1$. Isso já
+está, para soluções positivas, em~\cite{AmbrosettiArcoya2017}, que deve ser
+citado.
+\item \textbf{Positividade e ordenamento.} No caso semilinear, soluções com
+$t\in(t_i,t_{i+1})$ ficam naturalmente ordenadas por $t$. No caso de Kirchhoff,
+o ordenamento pontual exige comparação, e o princípio de comparação para
+operadores não locais falha em geral: se $u\le w$, não se segue que
+$M(\norm{u}^2)\le M(\norm{w}^2)$ tenha o sinal certo para comparar
+$-M(\norm{u}^2)\Delta u$ com $-M(\norm{w}^2)\Delta w$. Esse item do plano do
+artigo (seção ``2.4'' do roteiro) precisa de argumento próprio.
+\item \textbf{Referências.} Além das listadas no roteiro, são indispensáveis
+\cite{AmbrosettiArcoya2017,SunTang2013,CintraEtAl2020,ArcoyaRezendeSilva2019,ArcoyaGamez2001,Rabinowitz1971,Rabinowitz1973}.
+\end{enumerate}
+
+%=====================================================================
+\section{Problemas em aberto e direções de pesquisa}\label{sec:abertos}
+%=====================================================================
+
+\begin{problema}[dobras]
+Provar a Conjectura~\ref{conj:dobra} e estendê-la a dobras degeneradas
+($M'(s_0)=M''(s_0)=0$), em que a condição pontual passa a envolver derivadas
+de ordem superior de $M$.
+\end{problema}
+
+\begin{problema}[ressonância no infinito]
+Formalizar a análise~\eqref{eq:direcao-infinito}: sob $(M_\infty)$ e
+$M(s)-m_\infty\sim cs^{-\alpha}$, determinar condições necessárias e
+suficientes para a solubilidade de $-M(\norm{u}^2)\Delta u=m_\infty\lambda_1u+g(x,u)$
+com $g$ limitada, distinguindo os regimes $\alpha<1/2$, $\alpha=1/2$ e
+$\alpha>1/2$.
+\end{problema}
+
+\begin{problema}[autovalores múltiplos]
+Para $\lambda_k$ múltiplo, as soluções do problema linear formam esferas em
+$E(\lambda_k)$. Desenvolver uma redução de Lyapunov--Schmidt em que a equação
+bifurcada é um campo de vetores numa esfera de dimensão $\dim E(\lambda_k)-1$,
+e formular condições de Landesman--Lazer locais em termos do grau desse campo
+ou da categoria de Lusternik--Schnirelmann.
+\end{problema}
+
+\begin{problema}[caso degenerado]
+Para $M(0)=0$, a origem é degenerada para todo $\lambda$ e
+$\Sigma_M=(0,\infty)$ pode conter soluções em todos os autoespaços
+(Exemplo~\ref{ex:degenerado}). Entender o análogo de~\eqref{eq:P} e o papel de uma condição local
+nesse caso.
+\end{problema}
+
+\begin{problema}[ressonância relativa ao problema homogêneo]
+Relacionar a teoria aqui descrita, construída sobre o espectro de $-\Delta$,
+com a teoria de ressonância baseada no problema de autovalores
+homogêneo~\eqref{eq:autovalor-PZ} de Perera e Zhang~\cite{PereraZhang2006} e
+usada em~\cite{SunTang2013,SongTangChen2015}. Em particular, formular uma
+condição de Landesman--Lazer local para não linearidades
+$f(x,s)=\nu b\,s^3+h(x,s)$ perto de um autovalor $\nu_k$
+de~\eqref{eq:autovalor-PZ}.
+\end{problema}
+
+\begin{problema}[$p$-Kirchhoff]
+Estender a teoria ao operador $-M(\norm{\nabla u}_p^p)\Delta_pu$, combinando a
+abordagem de Arcoya, Rezende e Silva~\cite{ArcoyaRezendeSilva2019} para o
+$p$-Laplaciano com a Proposição~\ref{prop:reducao}, que continua válida.
+\end{problema}
+
+\begin{problema}[estrutura global]
+Descrever globalmente o conjunto de soluções de~\eqref{eq:P} no plano
+$(\lambda,\norm{u})$, para $\mu$ fixo, ligando os ramos que nascem de
+$M(0)\lambda_k$ às curvas $s\mapsto\lambda_kM(s)$ da Figura~\ref{fig:espectro}
+e, quando vale $(M_\infty)$, aos pontos $m_\infty\lambda_k$.
+\end{problema}
+
+\begin{problema}[versões fracionárias e em $\R^N$]
+Adaptar a Proposição~\ref{prop:espectro} e o Lema~\ref{lema:naodeg} ao modelo
+fracionário de~\cite{FiscellaValdinoci2014}, em domínio limitado, e investigar
+problemas em $\R^N$ com potencial, em que o espectro do operador linear pode ter
+parte essencial.
+\end{problema}
+
+%=====================================================================
+\section*{Nota sobre as fontes}
+%=====================================================================
+\addcontentsline{toc}{section}{Nota sobre as fontes}
+
+Os dados bibliográficos foram conferidos em bases públicas em outubro de 2026.
+Os resumos de resultados de terceiros na Seção~\ref{sec:panorama} baseiam-se em
+resumos e descrições publicados e devem ser conferidos nos textos originais
+antes de qualquer citação em artigo, em especial os enunciados
+de~\cite{SunTang2013,BensedikBouchekif2009,ChenKuoWu2011,RezendeSanchezSilva2019}.
+Os resultados das Seções~\ref{sec:espectro} e~\ref{sec:consequencias} são
+deduzidos aqui; os da Seção~\ref{sec:LL-kirchhoff} e a
+Conjectura~\ref{conj:dobra} são propostas de trabalho.
+
+\bibliographystyle{amsplain}
+\bibliography{referencias}
+
+\end{document}

@@ -1,0 +1,211 @@
+\providecommand{\bysame}{\leavevmode\hbox to3em{\hrulefill}\thinspace}
+\providecommand{\MR}{\relax\ifhmode\unskip\space\fi MR }
+% \MRhref is called by the amsart/book/proc definition of \MR.
+\providecommand{\MRhref}[2]{%
+  \href{http://www.ams.org/mathscinet-getitem?mr=#1}{#2}
+}
+\providecommand{\href}[2]{#2}
+\begin{thebibliography}{10}
+
+\bibitem{AhmadLazerPaul1976}
+S.~Ahmad, A.~C. Lazer, and J.~L. Paul, \emph{Elementary critical point theory
+  and perturbations of elliptic boundary value problems at resonance}, Indiana
+  Univ. Math. J. \textbf{25} (1976), 933--944.
+
+\bibitem{AlvesCorrea2001}
+C.~O. Alves and F.~J. S.~A. Corr{\^e}a, \emph{On existence of solutions for a
+  class of problem involving a nonlinear operator}, Comm. Appl. Nonlinear Anal.
+  \textbf{8} (2001), 43--56.
+
+\bibitem{AlvesCorreaFigueiredo2010}
+C.~O. Alves, F.~J. S.~A. Corr{\^e}a, and G.~M. Figueiredo, \emph{On a class of
+  nonlocal elliptic problems with critical growth}, Differ. Equ. Appl.
+  \textbf{2} (2010), 409--417.
+
+\bibitem{AlvesCorreaMa2005}
+C.~O. Alves, F.~J. S.~A. Corr{\^e}a, and T.~F. Ma, \emph{Positive solutions for
+  a quasilinear elliptic equation of {K}irchhoff type}, Comput. Math. Appl.
+  \textbf{49} (2005), no.~1, 85--93.
+
+\bibitem{AmbrosettiArcoya2017}
+A.~Ambrosetti and D.~Arcoya, \emph{Positive solutions of elliptic {K}irchhoff
+  equations}, Adv. Nonlinear Stud. \textbf{17} (2017), no.~1, 3--15.
+
+\bibitem{ArcoyaGamez2001}
+D.~Arcoya and J.~L. G{\'a}mez, \emph{Bifurcation theory and related problems:
+  anti-maximum principle and resonance}, Comm. Partial Differential Equations
+  \textbf{26} (2001), no.~9--10, 1879--1911.
+
+\bibitem{ArcoyaRezendeSilva2019}
+D.~Arcoya, M.~C.~M. Rezende, and E.~A.~B. Silva, \emph{Quasilinear problems
+  under local {L}andesman--{L}azer condition}, Calc. Var. Partial Differential
+  Equations \textbf{58} (2019), Art. 210.
+
+\bibitem{ArosioPanizzi1996}
+A.~Arosio and S.~Panizzi, \emph{On the well-posedness of the {K}irchhoff
+  string}, Trans. Amer. Math. Soc. \textbf{348} (1996), 305--330.
+
+\bibitem{AutuoriFiscellaPucci2015}
+G.~Autuori, A.~Fiscella, and P.~Pucci, \emph{Stationary {K}irchhoff problems
+  involving a fractional elliptic operator and a critical nonlinearity},
+  Nonlinear Anal. \textbf{125} (2015), 699--714.
+
+\bibitem{BensedikBouchekif2009}
+A.~Bensedik and M.~Bouchekif, \emph{On an elliptic equation of {K}irchhoff-type
+  with a potential asymptotically linear at infinity}, Math. Comput. Modelling
+  \textbf{49} (2009), 1089--1096.
+
+\bibitem{Bernstein1940}
+S.~Bernstein, \emph{Sur une classe d'{\'e}quations fonctionnelles aux
+  d{\'e}riv{\'e}es partielles}, Bull. Acad. Sci. URSS S{\'e}r. Math. [Izv.
+  Akad. Nauk SSSR] \textbf{4} (1940), 17--26.
+
+\bibitem{Carrier1945}
+G.~F. Carrier, \emph{On the non-linear vibration problem of the elastic
+  string}, Quart. Appl. Math. \textbf{3} (1945), 157--165.
+
+\bibitem{ChenKuoWu2011}
+C.-Y. Chen, Y.-C. Kuo, and T.-F. Wu, \emph{The {N}ehari manifold for a
+  {K}irchhoff type problem involving sign-changing weight functions}, J.
+  Differential Equations \textbf{250} (2011), 1876--1908.
+
+\bibitem{CintraEtAl2020}
+W.~Cintra, J.~R. Santos~J{\'u}nior, G.~Siciliano, and A.~Su{\'a}rez,
+  \emph{Existence results of positive solutions for {K}irchhoff type equations
+  via bifurcation methods}, Math. Z. \textbf{295} (2020), 1143--1161.
+
+\bibitem{CrandallRabinowitz1971}
+M.~G. Crandall and P.~H. Rabinowitz, \emph{Bifurcation from simple
+  eigenvalues}, J. Funct. Anal. \textbf{8} (1971), 321--340.
+
+\bibitem{DanconaSpagnolo1992}
+P.~D'Ancona and S.~Spagnolo, \emph{Global solvability for the degenerate
+  {K}irchhoff equation with real analytic data}, Invent. Math. \textbf{108}
+  (1992), 247--262.
+
+\bibitem{Figueiredo2013}
+G.~M. Figueiredo, \emph{Existence of a positive solution for a {K}irchhoff
+  problem type with critical growth via truncation argument}, J. Math. Anal.
+  Appl. \textbf{401} (2013), no.~2, 706--713.
+
+\bibitem{FiscellaValdinoci2014}
+A.~Fiscella and E.~Valdinoci, \emph{A critical {K}irchhoff type problem
+  involving a nonlocal operator}, Nonlinear Anal. \textbf{94} (2014), 156--170.
+
+\bibitem{GilbargTrudinger2001}
+D.~Gilbarg and N.~S. Trudinger, \emph{Elliptic partial differential equations
+  of second order}, Classics in Mathematics, Springer, Berlin, 2001.
+
+\bibitem{HeZou2009}
+X.~He and W.~Zou, \emph{Infinitely many positive solutions for {K}irchhoff-type
+  problems}, Nonlinear Anal. \textbf{70} (2009), 1407--1414.
+
+\bibitem{HeZou2012}
+\bysame, \emph{Existence and concentration behavior of positive solutions for a
+  {K}irchhoff equation in $\mathbb{R}^3$}, J. Differential Equations
+  \textbf{252} (2012), 1813--1834.
+
+\bibitem{Kirchhoff1883}
+G.~Kirchhoff, \emph{Vorlesungen {\"u}ber mathematische {P}hysik: {M}echanik},
+  Teubner, Leipzig, 1883.
+
+\bibitem{LandesmanLazer1970}
+E.~M. Landesman and A.~C. Lazer, \emph{Nonlinear perturbations of linear
+  elliptic boundary value problems at resonance}, J. Math. Mech. \textbf{19}
+  (1970), 609--623.
+
+\bibitem{LiYe2014}
+G.~Li and H.~Ye, \emph{Existence of positive ground state solutions for the
+  nonlinear {K}irchhoff type equations in $\mathbb{R}^3$}, J. Differential
+  Equations \textbf{257} (2014), 566--600.
+
+\bibitem{Lions1978}
+J.-L. Lions, \emph{On some questions in boundary value problems of mathematical
+  physics}, Contemporary Developments in Continuum Mechanics and Partial
+  Differential Equations, North-Holland Math. Stud., vol.~30, North-Holland,
+  Amsterdam, 1978, pp.~284--346.
+
+\bibitem{Ma2005}
+T.~F. Ma, \emph{Remarks on an elliptic equation of {K}irchhoff type}, Nonlinear
+  Anal. \textbf{63} (2005), e1967--e1977.
+
+\bibitem{MaRivera2003}
+T.~F. Ma and J.~E. Mu{\~n}oz~Rivera, \emph{Positive solutions for a nonlinear
+  nonlocal elliptic transmission problem}, Appl. Math. Lett. \textbf{16}
+  (2003), 243--248.
+
+\bibitem{MaoZhang2009}
+A.~Mao and Z.~Zhang, \emph{Sign-changing and multiple solutions of {K}irchhoff
+  type problems without the {P.S.} condition}, Nonlinear Anal. \textbf{70}
+  (2009), no.~3, 1275--1287.
+
+\bibitem{Naimen2014}
+D.~Naimen, \emph{The critical problem of {K}irchhoff type elliptic equations in
+  dimension four}, J. Differential Equations \textbf{257} (2014), 1168--1193.
+
+\bibitem{PereraZhang2006}
+K.~Perera and Z.~Zhang, \emph{Nontrivial solutions of {K}irchhoff-type problems
+  via the {Y}ang index}, J. Differential Equations \textbf{221} (2006),
+  246--255.
+
+\bibitem{Pohozaev1975}
+S.~I. Poho{\v{z}}aev, \emph{A certain class of quasilinear hyperbolic
+  equations}, Mat. Sb. (N.S.) \textbf{96(138)} (1975), 152--166.
+
+\bibitem{PucciRadulescu2019}
+P.~Pucci and V.~D. R{\u{a}}dulescu, \emph{Progress in nonlinear {K}irchhoff
+  problems}, Nonlinear Anal. \textbf{186} (2019), Editorial do n{\'u}mero
+  especial hom{\^o}nimo.
+
+\bibitem{Rabinowitz1971}
+P.~H. Rabinowitz, \emph{Some global results for nonlinear eigenvalue problems},
+  J. Funct. Anal. \textbf{7} (1971), 487--513.
+
+\bibitem{Rabinowitz1973}
+\bysame, \emph{On bifurcation from infinity}, J. Differential Equations
+  \textbf{14} (1973), 462--475.
+
+\bibitem{Rabinowitz1986}
+\bysame, \emph{Minimax methods in critical point theory with applications to
+  differential equations}, CBMS Regional Conf. Ser. in Math., vol.~65, Amer.
+  Math. Soc., Providence, RI, 1986.
+
+\bibitem{RezendeSanchezSilva2019}
+M.~C.~M. Rezende, P.~M. S{\'a}nchez-Aguilar, and E.~A.~B. Silva, \emph{A
+  {L}andesman--{L}azer local condition for semilinear elliptic problems}, Bull.
+  Braz. Math. Soc. (N.S.) \textbf{50} (2019), 889--911.
+
+\bibitem{Ricceri2010}
+B.~Ricceri, \emph{On an elliptic {K}irchhoff-type problem depending on two
+  parameters}, J. Global Optim. \textbf{46} (2010), 543--549.
+
+\bibitem{SanchezAguilar2017}
+P.~M. S{\'a}nchez-Aguilar, \emph{A {L}andesman--{L}azer local condition for
+  nonlinear elliptic problems}, Ph.D. thesis, Universidade de Bras{\'i}lia,
+  2017, Tese de doutorado, orientador: E. A. B. Silva.
+
+\bibitem{SantosJuniorSiciliano2018}
+J.~R. Santos~J{\'u}nior and G.~Siciliano, \emph{Positive solutions for a
+  {K}irchhoff problem with vanishing nonlocal term}, J. Differential Equations
+  \textbf{265} (2018), no.~5, 2034--2043.
+
+\bibitem{Silva1991}
+E.~A.~B. Silva, \emph{Linking theorems and applications to semilinear elliptic
+  problems at resonance}, Nonlinear Anal. \textbf{16} (1991), 455--477.
+
+\bibitem{SongTangChen2015}
+S.-Z. Song, C.-L. Tang, and S.-J. Chen, \emph{Multiple solutions for
+  {K}irchhoff type problem near resonance}, Electron. J. Differential Equations
+  \textbf{2015} (2015), no.~215, 1--7.
+
+\bibitem{SunTang2013}
+J.~Sun and C.-L. Tang, \emph{Resonance problems for {K}irchhoff type
+  equations}, Discrete Contin. Dyn. Syst. \textbf{33} (2013), no.~5,
+  2139--2154.
+
+\bibitem{ZhangPerera2006}
+Z.~Zhang and K.~Perera, \emph{Sign changing solutions of {K}irchhoff type
+  problems via invariant sets of descent flow}, J. Math. Anal. Appl.
+  \textbf{317} (2006), 456--463.
+
+\end{thebibliography}
