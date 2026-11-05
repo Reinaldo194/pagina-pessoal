@@ -14,6 +14,21 @@ Cenas em [Manim Community](https://www.manim.community/) (testadas na versão 0.
 | `08_exponencial_logaritmo.py` | Exponenciais e logaritmos | `ExponencialBase`, `LogaritmoInversa` (reflexão em y=x), `ExponencialEPG` (PA → PG) |
 | `09_funcoes_trigonometricas.py` | Funções trigonométricas | `SenoDoCirculo` (função de Euler → gráfico), `AmplitudePeriodo` (A sen(Bx+C)+D) |
 
+## Fichas por tipo de função (`funcoes/`)
+
+Um vídeo separado para cada tipo de função, todos com o mesmo layout: definição no topo, gráfico à esquerda e as propriedades surgindo à direita (domínio, imagem, zeros, monotonicidade, simetrias e a propriedade característica), cada uma destacada no gráfico.
+
+| Arquivo | Cenas |
+|---|---|
+| `funcoes/afim.py` | `FuncaoAfim` |
+| `funcoes/quadratica.py` | `FuncaoQuadratica` |
+| `funcoes/polinomial.py` | `FuncaoPolinomial` |
+| `funcoes/exponencial.py` | `FuncaoExponencial` |
+| `funcoes/logaritmica.py` | `FuncaoLogaritmica` |
+| `funcoes/trigonometricas.py` | `FuncaoSeno`, `FuncaoCosseno`, `FuncaoTangente` |
+
+Exemplo: `manim -pql funcoes/quadratica.py FuncaoQuadratica`
+
 ## Instalação
 
 Requer Python 3.9+, FFmpeg e uma distribuição LaTeX (TeX Live ou MiKTeX) com `dvisvgm`.
