@@ -1,0 +1,464 @@
+% ============================================================
+% Uma trigonometria, cinco percursos
+% Texto de trabalho sobre a trigonometria na educação básica
+% dos Estados Unidos, Alemanha, França, Rússia e Brasil.
+% Compilar: pdflatex -> bibtex -> pdflatex -> pdflatex
+% Trechos marcados com % CONFERIR devem ser checados na fonte.
+% ============================================================
+\documentclass[
+    article,
+    12pt,
+    a4paper,
+    sumario=tradicional
+]{abntex2}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{indentfirst}
+\usepackage{microtype}
+\usepackage{amsmath,amssymb}
+\usepackage{url}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{array}
+
+\usepackage[alf,bibjustif]{abntex2cite}
+
+\DeclareMathOperator{\arcsen}{arcsen}
+
+% Ambiente de quadro (ABNT): quadros trazem informação textual
+\newcommand{\quadroname}{Quadro}
+\newfloat{quadro}{loq}{\quadroname}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\titulo{Uma trigonometria, cinco percursos: o ensino escolar de trigonometria nos Estados Unidos, na Alemanha, na França, na Rússia e no Brasil}
+\tituloestrangeiro{One trigonometry, five paths: school trigonometry in the United States, Germany, France, Russia and Brazil}
+\autor{[Nome do autor]}
+\local{Cuiabá}
+\data{2026}
+
+\makeatletter
+\hypersetup{
+    pdftitle={\@title},
+    pdfauthor={\@author},
+    pdfsubject={Trigonometria na educação básica: comparação entre países},
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+\makeatother
+
+\setlength{\parindent}{1.3cm}
+\setlength{\parskip}{0.2cm}
+
+\begin{document}
+
+\maketitle
+
+\begin{resumoumacoluna}
+O texto compara o lugar da trigonometria na educação básica de cinco países
+--- Estados Unidos, Alemanha, França, Rússia e Brasil --- a partir de documentos
+curriculares oficiais e de livros didáticos de referência. Os cinco
+compartilham um mesmo esqueleto, que vai do ângulo à semelhança, da semelhança
+às razões no triângulo retângulo, daí ao círculo trigonométrico e às funções
+periódicas. As diferenças estão em três pontos: quem decide o currículo (o
+país, o estado ou cada rede), em que ano cada etapa aparece e, sobretudo,
+quanto espaço recebe a trigonometria que se pode chamar de algébrica, isto é,
+identidades, funções inversas e equações. Esse espaço vai do quase
+desaparecimento, na Alemanha, a um tratamento sistemático e obrigatório, na
+Rússia; França e Estados Unidos o reservam a percursos opcionais, e a França o
+faz por meio dos números complexos. O texto registra também curiosidades de
+nomenclatura, notação e tradição didática: mnemônicos, o teorema de Al-Kashi, a
+notação tg, o grado francês, a origem da palavra seno e os círculos
+matemáticos russos. Por fim, discute o que a comparação sugere para o ensino de
+trigonometria no Brasil.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Palavras-chave}: Trigonometria. Currículo. Educação comparada. Educação básica.
+\end{resumoumacoluna}
+
+\renewcommand{\resumoname}{Abstract}
+\begin{resumoumacoluna}
+\begin{otherlanguage*}{english}
+This text compares the place of trigonometry in school mathematics in five
+countries --- the United States, Germany, France, Russia and Brazil --- based on
+official curriculum documents and reference textbooks. All five share the same
+backbone: from angles to similarity, from similarity to the ratios in a right
+triangle, and from there to the unit circle and to periodic functions. They
+differ in who sets the curriculum, in the school year in which each stage
+appears and, above all, in how much room is given to algebraic trigonometry,
+that is, identities, inverse functions and equations. That room ranges from
+near absence in Germany to a systematic and compulsory treatment in Russia,
+while France and the United States leave it to optional tracks, France through
+complex numbers. The text also records notational, terminological and
+pedagogical curiosities, and closes with a discussion of what the comparison
+suggests for the teaching of trigonometry in Brazil.
+
+\vspace{\onelineskip}
+\noindent
+\textbf{Keywords}: Trigonometry. Curriculum. Comparative education. School mathematics.
+\end{otherlanguage*}
+\end{resumoumacoluna}
+
+\textual
+
+\section{Introdução}
+
+Poucos assuntos da matemática escolar mudaram tão pouco em conteúdo nos
+últimos cem anos quanto a trigonometria. Seno, cosseno, leis dos senos e dos
+cossenos, o círculo de raio um e as fórmulas de adição estavam nos livros do
+início do século XX e continuam nos de hoje. O que muda de um país para outro
+é a ordem, a profundidade e o modo de dar sentido a esses objetos: o seno é
+primeiro uma razão entre lados ou uma coordenada no círculo? O radiano é
+apresentado como definição ou deduzido de uma proporção? As identidades são
+um capítulo para todos ou um apêndice para poucos?
+
+Este texto descreve como Estados Unidos, Alemanha, França e Rússia respondem a
+essas perguntas, e usa o Brasil como ponto de referência. A descrição se apoia
+nos documentos curriculares oficiais e, onde eles são genéricos, em livros
+didáticos de uso amplo. Não se pretende exaustividade. Currículos mudam, e em
+países federativos como Estados Unidos e Alemanha a variação entre estados é
+grande; o que segue é o percurso típico, não o de cada escola.
+
+Para comparar séries, usa-se a contagem de anos de escolaridade a partir do
+primeiro ano obrigatório, por volta dos seis anos de idade. Assim, o \textit{grade
+9} americano, a \textit{Klasse 9} alemã, a \textit{troisième} francesa e o 9º ano
+brasileiro correspondem, grosso modo, a alunos de 14 a 15 anos. A Rússia tem
+onze anos de escola, e a 10ª série russa reúne alunos de cerca de 16 anos, a
+idade do 11º ano americano e da 2ª série do ensino médio brasileiro.
+
+\section{Um esqueleto comum}
+
+Antes das diferenças, vale registrar o que se repete. Nos cinco países, a
+trigonometria escolar percorre, nesta ordem, as seguintes etapas:
+
+\begin{enumerate}
+\item o ângulo como medida e como giro, com o grau e o transferidor;
+\item semelhança de triângulos e teorema de Tales, junto com o teorema de
+Pitágoras;
+\item as razões trigonométricas no triângulo retângulo, justificadas pela
+semelhança: a razão entre dois lados depende só do ângulo;
+\item o triângulo qualquer, com as leis dos senos e dos cossenos e a fórmula
+da área $A = \tfrac12 ab \operatorname{sen}C$;
+\item o radiano e o círculo trigonométrico, que estendem seno e cosseno a
+qualquer número real;
+\item as funções seno e cosseno, seus gráficos e a modelagem de fenômenos
+periódicos;
+\item a trigonometria algébrica: identidades, fórmulas de adição, funções
+inversas, equações e inequações;
+\item o Cálculo das funções trigonométricas e o cosseno como ferramenta em
+vetores (produto escalar) e, em alguns casos, em números complexos.
+\end{enumerate}
+
+As etapas 1 a 3 são universais e concentradas entre o 7º e o 10º ano. As
+diferenças aparecem a partir da etapa 4, e ficam marcantes na etapa 7.
+
+\section{Estados Unidos}
+
+Não existe currículo nacional obrigatório nos Estados Unidos. A referência
+mais difundida é o \textit{Common Core State Standards for Mathematics}
+\cite{ccss2010}, adotado por cerca de quarenta estados a partir de 2010 e, desde
+então, revisto ou rebatizado em vários deles. Texas, Virgínia e Flórida, entre
+outros, seguem padrões próprios, mas com sequência parecida.
+
+A preparação começa cedo. No 4º ano, o ângulo é apresentado como giro e o grau
+como a fração $1/360$ de uma volta completa; no 7º ano entram as relações entre
+ângulos complementares, suplementares e opostos pelo vértice; no 8º, a
+semelhança por dilatações e o teorema de Pitágoras.
+
+O ensino médio americano costuma seguir a sequência \textit{Algebra I},
+\textit{Geometry}, \textit{Algebra II} e \textit{Precalculus}, do 9º ao 12º ano. Em
+\textit{Geometry}, o padrão G-SRT.6 é o ponto de partida: por semelhança, as
+razões entre os lados de um triângulo retângulo são propriedades do ângulo, o
+que leva à definição de seno, cosseno e tangente de um ângulo agudo. Seguem a
+relação entre seno e cosseno de ângulos complementares (G-SRT.7) e a resolução
+de triângulos retângulos em problemas aplicados (G-SRT.8). As leis dos senos e
+dos cossenos e a fórmula da área (G-SRT.9 a 11) aparecem como padrões
+avançados, marcados com o sinal (+), destinados a quem pretende cursos
+técnicos ou científicos.
+
+Um detalhe da geometria americana merece atenção: o radiano é definido no
+capítulo de circunferências (G-C.5), como a constante de proporcionalidade
+entre o comprimento do arco e o raio, antes de qualquer menção ao círculo
+trigonométrico. Só em \textit{Algebra II} o radiano reaparece como comprimento
+de arco no círculo unitário (F-TF.1), e o círculo passa a estender as funções
+a todos os números reais (F-TF.2). Nesse mesmo curso entram a modelagem de
+fenômenos periódicos com amplitude, frequência e linha média (F-TF.5) e a
+identidade $\operatorname{sen}^2\theta + \cos^2\theta = 1$ (F-TF.8).
+
+O restante da trigonometria algébrica fica em \textit{Precalculus}, como padrão
+avançado: valores exatos pelos triângulos especiais e simetrias pelo círculo
+(F-TF.3 e 4), funções inversas obtidas por restrição de domínio e equações
+trigonométricas em contextos de modelagem (F-TF.6 e 7) e a demonstração das
+fórmulas de adição (F-TF.9). Desde o ano letivo de 2023--2024 há ainda o
+\textit{AP Precalculus} \cite{collegeboard2023}, cuja terceira unidade trata
+de funções trigonométricas e polares, incluindo funções senoidais e suas
+transformações, inversas, equações, inequações e identidades.
+
+\section{Alemanha}
+
+Na Alemanha a educação é competência dos estados (\textit{Länder}). A
+Conferência dos Ministros da Educação, a KMK, fixa padrões nacionais para o
+fim do 10º ano \cite{kmk2003} e para o \textit{Abitur}, o exame de conclusão do
+ensino médio \cite{kmk2012}, mas cada estado distribui o conteúdo por série no
+seu próprio currículo. A descrição a seguir segue o percurso típico do
+\textit{Gymnasium}, o ramo que leva à universidade, tomando como exemplo o
+currículo da Baviera \cite{isb_lehrplanplus}. Em estados com oito anos de
+\textit{Gymnasium} e em estados com nove, os mesmos tópicos podem se deslocar
+um ano. % CONFERIR: séries exatas no LehrplanPLUS em vigor.
+
+Os primeiros anos dão grande peso à geometria de construção. O aluno alemão
+mede ângulos com o \textit{Geodreieck}, um esquadro com transferidor
+embutido, constrói triângulos com régua e compasso e estuda os casos de
+congruência. No 9º ano chegam os \textit{Strahlensätze}, versão alemã do
+teorema de Tales, e o grupo de Pitágoras: o próprio teorema, o teorema do
+cateto e o teorema da altura.
+
+As razões trigonométricas aparecem entre o 9º e o 10º ano, com nomes próprios
+para os lados do triângulo retângulo: \textit{Gegenkathete} (cateto oposto),
+\textit{Ankathete} (cateto adjacente) e \textit{Hypotenuse}. Em seguida vêm o
+círculo unitário (\textit{Einheitskreis}), o radiano (\textit{Bogenmaß}) e a
+função seno, estudada sobretudo pelos gráficos de
+$f(x) = a\operatorname{sen}\bigl(b(x-c)\bigr) + d$ e por problemas de modelagem,
+como a duração do dia ao longo do ano. As equações trigonométricas se limitam,
+em geral, a casos simples resolvidos com a calculadora; o arco-seno raramente
+é estudado como função. As leis dos senos e dos cossenos, tradicionais no
+10º ano, ficaram mais leves ou opcionais em vários estados.
+
+No ensino médio (\textit{Oberstufe}), seno e cosseno entram na Análise, com
+derivadas e integrais, e o cosseno reaparece na geometria analítica com
+vetores, pela fórmula
+\[
+\cos\varphi = \frac{\vec a \cdot \vec b}{\lVert \vec a\rVert\,\lVert \vec b\rVert},
+\]
+que talvez seja o uso mais frequente da trigonometria nas provas do
+\textit{Abitur}. As fórmulas de adição (\textit{Additionstheoreme}) e as
+identidades em geral perderam espaço na maioria dos currículos, e os números
+complexos saíram da escola em quase todos os estados. A calculadora gráfica ou
+com sistema de álgebra computacional é comum e, em alguns estados, obrigatória
+no exame final.
+
+\section{França}
+
+A França é o caso oposto ao dos Estados Unidos e da Alemanha: tem currículo
+nacional único, os \textit{programmes} publicados pelo Ministério da Educação no
+\textit{Bulletin officiel}. A escola se divide em primário, \textit{collège}
+(da \textit{sixième} à \textit{troisième}, equivalentes ao 6º e ao 9º ano) e
+\textit{lycée} (\textit{seconde}, \textit{première} e \textit{terminale}).
+
+No \textit{collège} \cite{men2015}, os ângulos são medidos com transferidor
+(\textit{rapporteur}) e a soma dos ângulos do triângulo e os ângulos em retas
+paralelas vêm na \textit{cinquième}. O teorema de Pitágoras e sua recíproca
+ficam na \textit{quatrième}, série em que, por tradição, o cosseno de um ângulo
+agudo entrava sozinho, antes do seno e da tangente. Na \textit{troisième} chegam o
+teorema de Tales, a semelhança e as três razões no triângulo retângulo.
+% CONFERIR: os programas do collège estão sendo revistos (reforma de 2024--2026).
+
+A reforma do \textit{lycée} de 2019 mudou o lugar da trigonometria. A
+\textit{seconde} é comum a todos e usa a trigonometria do triângulo retângulo,
+sem funções. A partir da \textit{première}, a matemática completa passou a ser
+uma especialidade escolhida pelo aluno \cite{men2019a}. Nela aparece o círculo
+trigonométrico, apresentado pelo \textit{enroulement de la droite numérique}: a
+reta real é ``enrolada'' sobre o círculo de raio um, e cada número real $x$
+corresponde a um ponto, cujas coordenadas definem $\cos x$ e $\operatorname{sen} x$.
+Seguem os valores notáveis, a paridade, a periodicidade e os gráficos.
+
+O traço mais característico da trigonometria francesa é o produto escalar. Na
+mesma \textit{première} de especialidade, ele é definido de modo a valer
+$\vec u \cdot \vec v = \lVert \vec u\rVert\,\lVert \vec v\rVert\cos\theta$, e
+dele se deduz a lei dos cossenos, que na França se chama teorema de Al-Kashi.
+A lei dos senos tem pouco espaço.
+
+Na \textit{terminale} \cite{men2019b}, a especialidade traz as derivadas de seno
+e cosseno, o limite $\operatorname{sen}x/x \to 1$ e as primitivas. A opção
+\textit{mathématiques expertes}, voltada a quem segue para as ciências exatas,
+trata os números complexos na forma trigonométrica e exponencial, com
+$e^{i\theta} = \cos\theta + i\operatorname{sen}\theta$ e as fórmulas de Euler e de
+Moivre. É sobretudo por esse caminho que as fórmulas de adição e as identidades
+chegam ao aluno francês.
+
+Uma consequência da reforma é discutida na própria França: quem não escolhe a
+especialidade termina o \textit{lycée} sem ter visto o radiano nem a função
+seno.
+
+\section{Rússia}
+
+\subsection{O currículo}
+
+A Rússia tem currículo nacional: um padrão federal (\textit{FGOS}) e, desde
+2023, programas federais únicos por disciplina \cite{fgos}. A partir do 7º
+ano, a matemática se divide em duas disciplinas paralelas, Álgebra e
+Geometria, cada uma com seus livros. Os mais usados são, em geometria, os de
+Atanasyan e colaboradores \cite{atanasyan} e os de Pogorelov e, em álgebra e
+análise, os de Kolmogorov e colaboradores \cite{kolmogorov}, de Mordkovich e de
+Alimov.
+
+Na geometria do 8º ano, junto com a semelhança e o teorema de Pitágoras, entram
+seno, cosseno e tangente do ângulo agudo e seus valores para $30^\circ$,
+$45^\circ$ e $60^\circ$. No 9º ano a geometria vai bem mais longe do que nos
+outros países nessa idade: seno e cosseno passam a ser definidos para ângulos
+de $0^\circ$ a $180^\circ$ por uma semicircunferência unitária, com a identidade
+fundamental e as fórmulas de redução para $90^\circ-\alpha$ e $180^\circ-\alpha$;
+seguem a fórmula da área, as leis dos senos e dos cossenos, a resolução de
+triângulos e o produto escalar de vetores. Tudo isso é conteúdo de todos os
+alunos e cai no exame de fim do 9º ano.
+
+O núcleo da trigonometria russa está na disciplina Álgebra e Princípios de
+Análise do 10º ano. O radiano e a ``circunferência numérica''
+(\textit{chislovaya okruzhnost'}), em espírito parecido com o
+\textit{enroulement} francês, abrem o capítulo; depois vêm seno, cosseno,
+tangente e cotangente para todo número real; as fórmulas de adição, de arco
+duplo e de arco metade, as fórmulas de redução e a transformação de somas em
+produtos; os gráficos e as propriedades das funções; arco-seno, arco-cosseno e
+arco-tangente como funções, e não apenas como teclas da calculadora; e, por
+fim, equações e inequações trigonométricas, com fórmulas gerais como
+\[
+\operatorname{sen}x = a \iff x = (-1)^k\arcsen a + \pi k,\quad k\in\mathbb{Z}\qquad (|a|\le 1),
+\]
+e métodos de substituição, fatoração e equações homogêneas. No 11º ano vêm as
+derivadas e as integrais. O exame de saída de nível avançado tem uma questão
+típica de equação trigonométrica com seleção das raízes num intervalo, e essa
+questão orienta boa parte do ensino nos dois últimos anos.
+
+\subsection{Os círculos matemáticos}
+
+A fama russa em matemática escolar vem menos do currículo do que de uma
+tradição paralela a ele: os círculos matemáticos (\textit{matematicheskie
+kruzhki}). Eles funcionam fora da grade, em universidades, nos antigos
+Palácios de Pioneiros, em escolas especializadas em física e matemática ---
+como a escola-internato criada por Kolmogorov junto à Universidade de Moscou
+em 1963 --- e no ensino por correspondência fundado por Gelfand. Sustentam-se
+nas olimpíadas e na revista \textit{Kvant}, e o relato mais conhecido dessa
+experiência, escrito a partir dos círculos de Leningrado, está em
+\citeonline{fomin1996}.
+
+Nos círculos, a trigonometria não é conteúdo a cumprir, e sim ferramenta para
+resolver problemas de geometria. O chamado método trigonométrico em
+planimetria usa a lei dos senos, a forma trigonométrica do teorema de Ceva e
+identidades do triângulo, como $\cos A + \cos B + \cos C = 1 + r/R$, em que $r$ e
+$R$ são os raios das circunferências inscrita e circunscrita. O livro de
+\citeonline{gelfand2001}, nascido do ensino por correspondência, mostra o
+espírito: a trigonometria é tratada como algo a ser entendido a partir de
+poucas ideias, e não como uma coleção de fórmulas.
+
+\section{O Brasil como ponto de referência}
+
+O Brasil se parece com a França e com a Rússia na organização: há uma base
+nacional, a BNCC \cite{bncc2018}, que as redes estaduais e municipais
+detalham. No Ensino Fundamental, a BNCC chega à semelhança e ao teorema de
+Pitágoras no 9º ano (habilidades EF09MA13 e EF09MA14). No Ensino Médio, que a
+BNCC organiza por competências e não por série, a trigonometria aparece de
+forma explícita em habilidades como EM13MAT306, sobre fenômenos periódicos e
+as funções seno e cosseno, e EM13MAT308, que inclui as leis dos senos e dos
+cossenos. % CONFERIR: códigos e redação das habilidades na versão oficial.
+A série em que as razões trigonométricas, o círculo e as funções aparecem
+depende do currículo de cada rede e do livro adotado.
+
+\section{Quadro comparativo}
+
+O Quadro~\ref{quadro:comparativo} resume a comparação. As séries indicadas são
+as típicas e podem variar dentro de cada país.
+
+\begin{quadro}[htb]
+\footnotesize
+\caption{A trigonometria escolar em cinco países: síntese}
+\label{quadro:comparativo}
+\begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}p{2.4cm}YYYYY@{}}
+\toprule
+ & \textbf{EUA} & \textbf{Alemanha} & \textbf{França} & \textbf{Rússia} & \textbf{Brasil}\\
+\midrule
+Quem decide & estados (Common Core como referência) & estados (padrões da KMK) & país & país & país (BNCC), detalhada pelas redes\\
+Razões no triângulo retângulo & 10º ano & 9º--10º ano & 9º ano & 8º ano & em geral 9º ano\\
+Leis dos senos e cossenos & avançado (+) & 10º ano, mais leve & Al-Kashi pelo produto escalar & 9º ano, para todos & ensino médio\\
+Radiano e círculo & radiano pela proporção do arco; círculo no 11º & 10º ano & especialidade da \textit{première} & 10º ano & ensino médio\\
+Identidades e adição & avançado (Precalculus) & quase ausentes & via complexos, opção \textit{expertes} & 10º ano, para todos & varia muito\\
+Inversas e equações & avançado & só casos simples & pouco espaço & 10º ano, em profundidade & varia muito\\
+Cálculo & AP Calculus & \textit{Oberstufe} & \textit{terminale} & 11º ano & em geral ausente\\
+Notação da tangente & tan & tan & tan & tg & tg\\
+\bottomrule
+\end{tabularx}
+\fonte{Elaboração própria a partir das fontes citadas no texto.}
+\end{quadro}
+
+\section{Curiosidades}
+
+\subsection{Mnemônicos}
+ Nos Estados Unidos, as três razões se decoram com
+``SOH-CAH-TOA'' (\textit{sine} = \textit{opposite}/\textit{hypotenuse}, e assim por
+diante). Na França, a mesma sigla vira ``CAH-SOH-TOA'', que se lê como
+\textit{casse-toi}, um ``some daqui'' que nenhum aluno esquece. Na Alemanha, um
+mnemônico conhecido é ``GAGA Hühnerhof AG'': as letras G, A, G, A são os
+numeradores e as iniciais seguintes, H, H, A, G, os denominadores, o que dá
+$\operatorname{sen} = G/H$, $\cos = A/H$, $\tan = G/A$ e $\cot = A/G$, com $G$ de
+\textit{Gegenkathete}, $A$ de \textit{Ankathete} e $H$ de \textit{Hypotenuse}.
+
+\subsection{Al-Kashi}
+ O nome francês da lei dos cossenos homenageia o
+astrônomo e matemático persa Jamshid al-Kashi, do século XV, que a usou de
+forma sistemática em cálculos astronômicos.
+
+\subsection{tg ou tan?}
+ A notação também separa tradições. Estados Unidos,
+Alemanha e França escrevem tan e cot. Rússia e Brasil escrevem tg, e para a cotangente o Brasil
+usa cotg, onde os russos escrevem ctg; arco-seno se escreve
+arcsen em português e arcsin em russo, inglês, alemão e francês.
+
+\subsection{O grado}
+ As calculadoras científicas têm três modos de ângulo:
+DEG, RAD e GRAD. O terceiro é o grado (ou \textit{gon}), em que uma volta vale
+400 unidades e o ângulo reto vale 100. Ele nasceu na França, no espírito
+decimal do sistema métrico, não se firmou na escola e sobrevive na topografia.
+
+\subsection{Por que ``seno''?}
+ A palavra tem uma das etimologias mais tortas da
+matemática \cite{maor1998,vanbrummelen2009}. Os astrônomos indianos chamavam a
+meia-corda de \textit{jya}; os árabes transliteraram o termo como \textit{jiba},
+escrito só com consoantes. Tradutores latinos leram a palavra como
+\textit{jaib}, que significa dobra ou enseada, e a traduziram por
+\textit{sinus}, de onde vêm o seno, o \textit{sine} e o \textit{Sinus}.
+
+\subsection{Definir ou deduzir o radiano}
+ Nos Estados Unidos, o radiano nasce
+de uma proporção (o arco é proporcional ao raio); na França e na Rússia, de um
+enrolamento da reta sobre o círculo; na Alemanha, como uma nova unidade de
+medida associada ao círculo unitário. São três modos de dar sentido ao mesmo
+número, e cada um sugere uma atividade diferente em sala de aula.
+
+\section{Considerações finais}
+
+A comparação mostra um mesmo esqueleto e uma divergência concentrada no que se
+faz depois da função seno. A Alemanha praticamente abandonou a trigonometria
+algébrica e investiu em modelagem, Cálculo e vetores. A França a manteve, mas
+em ramo opcional e apoiada nos números complexos. Os Estados Unidos a
+reservaram a padrões avançados. A Rússia a trata para todos, em profundidade,
+no 10º ano, e mantém nos círculos uma trigonometria que nasce de problemas.
+
+Para o Brasil, duas observações parecem úteis. A primeira é que a ordem
+``medir, prever e só então animar'', que aparece com clareza nos documentos
+americanos e alemães, tem respaldo internacional: o círculo trigonométrico
+funciona melhor como ponte para razões já compreendidas do que como ponto de
+partida. A segunda é que a ausência de identidades e equações como eixo de
+pesquisa e de ensino não é uma fatalidade. A experiência russa mostra que esses
+tópicos podem ocupar o centro do currículo, e a francesa mostra que podem ser
+apresentados como consequência de uma estrutura mais rica, a dos números
+complexos ou do produto escalar.
+
+\section*{Nota sobre as fontes}
+\addcontentsline{toc}{section}{Nota sobre as fontes}
+
+A descrição dos currículos é um retrato do percurso típico em cada país e
+deve ser conferida na versão em vigor dos documentos citados antes de ser usada
+como dado em pesquisa, em especial a distribuição por série na Alemanha e na
+Rússia, os códigos da BNCC e os programas franceses do \textit{collège}, que estão
+em revisão. Os códigos do \textit{Common Core} seguem a numeração oficial de 2010.
+
+\postextual
+
+\bibliography{referencias}
+
+\end{document}
